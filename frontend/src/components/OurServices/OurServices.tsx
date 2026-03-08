@@ -12,12 +12,12 @@ const OurServices = () => {
   const services = [
     {
       name: "Interior",
-      des: "Stunning exterior rendering with precise detailing, realistic lighting, and exceptional visual appeal.",
+      des: "Realistic interior renders that showcase lighting, materials, and atmosphere.",
       img: "/images/interior.jpg",
     },
     {
       name: "Architectural Plan",
-      des: "Stunning exterior rendering with precise detailing, realistic lighting, and exceptional visual appeal.",
+      des: "Realistic exterior renders that highlight the architectural style, structure, and visual impact of your project.",
       img: "/images/arch.jpg",
     },
     {
@@ -82,7 +82,7 @@ const OurServices = () => {
             <div
               id={`card1`}
               key={idx}
-              className="rounded-[19px] service-card"
+              className="rounded-[19px] service-card hover:cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
             >
               <div className="h-[400px] w-[350px] p-5  flex flex-col items-end justify-between ">
                 <div

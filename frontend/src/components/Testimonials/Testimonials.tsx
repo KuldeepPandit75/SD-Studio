@@ -21,7 +21,7 @@ const testimonials = [
     role: "Founder, Spacescape",
   },
   {
-    quote: `"We've been doing business with Sandeep 3D for several years now. They are the best in their domain and I would recommend them to anyone who needs this kind of service."`,
+    quote: `"Working with Sandeep 3D has been a fantastic experience. Their attention to detail and realistic visualizations helped us present our projects with complete confidence. The team is professional, responsive, and always delivers high-quality work."`,
     name: "Kuldeep Kumar",
     role: "CEO, VaultMeet",
   },
@@ -137,7 +137,7 @@ const Testimonials = () => {
               >
                 {testimonial.name}
               </p>
-              <p className="text-sm text-white/60 font-light">
+              <p className="text-sm text-white/60 font-light font-avant">
                 {testimonial.role}
               </p>
             </div>
