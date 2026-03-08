@@ -124,7 +124,7 @@ const Testimonials = () => {
 
             {/* Text */}
             <div className="flex-1 mb-[5rem]">
-              <p className="text-lg leading-[1.6] text-white/90 font-light pr-4">
+              <p className="text-lg leading-[1.6] text-white/90 font-light font-avant pr-4">
                 {testimonial.quote}
               </p>
             </div>

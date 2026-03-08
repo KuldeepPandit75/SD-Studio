@@ -188,14 +188,14 @@ ARCHITECTURE & DESIGN`;
 
     const [adminResponse, userResponse] = await Promise.all([
       resend.emails.send({
-        from: "SD Studio Website <noreply@resend.dev>",
-        to: [process.env.OWNER_EMAIL],
+        from: "SD Studio Website <noreply@sd.studio>",
+        to: [process.env.OWNER_EMAIL,process.env.OWNER2_EMAIL],
         subject: `New Project Inquiry: ${projectType} - SD Studio`,
         text: textContent,
         html: htmlContent,
       }),
       resend.emails.send({
-        from: "SD Studio Website <noreply@resend.dev>",
+        from: "SD Studio Website <noreply@sd.studio>",
         to: [email],
         subject: "We've Received Your Inquiry - SD Studio",
         text: userTextContent,
