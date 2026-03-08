@@ -78,7 +78,7 @@ const Footer = () => {
         {/* Left Side: Contact Info */}
         <div className="flex-1 flex flex-col justify-center space-y-10 lg:pr-10">
           <div>
-            <p className="tracking-widest text-[#B0B0B0] font-medium text-sm lg:text-base uppercase mb-8">
+            <p className="tracking-widest text-[#B0B0B0] font-medium text-sm lg:text-base uppercase mb-8 font-avant">
               Contact Us
             </p>
 

@@ -82,7 +82,21 @@ const OurServices = () => {
             <div
               id={`card1`}
               key={idx}
-              className="rounded-[19px] service-card hover:cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+              className="rounded-[19px] service-card hover:cursor-pointer"
+              onMouseEnter={(e) => {
+                gsap.to(e.currentTarget, {
+                  scale: 1.02,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+              }}
+              onMouseLeave={(e) => {
+                gsap.to(e.currentTarget, {
+                  scale: 1,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+              }}
             >
               <div className="h-[400px] w-[350px] p-5  flex flex-col items-end justify-between ">
                 <div

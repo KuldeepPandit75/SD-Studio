@@ -24,26 +24,26 @@ const Projects = () => {
       width: "w-[210px]",
       height: "h-[210px]",
     },
-    { id: 3, src: "/images/arch.jpg", width: "w-[210px]", height: "h-[210px]" },
+    { id: 3, src: "/images/proj1.jpg", width: "w-[210px]", height: "h-[210px]" },
     {
       id: 4,
-      src: "/images/exterior.jpg",
+      src: "/images/proj2.jpg",
       width: "w-[210px]",
       height: "h-[210px]",
     },
   ];
 
   const row2 = [
-    { id: 4, src: "/images/arch.jpg", width: "w-[210px]", height: "h-[210px]" },
+    { id: 4, src: "/images/proj3.jpg", width: "w-[210px]", height: "h-[210px]" },
     {
       id: 5,
-      src: "/images/exterior.jpg",
+      src: "/images/proj4.jpg",
       width: "w-[210px]",
       height: "h-[210px]",
     },
     {
       id: 6,
-      src: "/images/interior.jpg",
+      src: "/images/proj5.jpg",
       width: "w-[210px]",
       height: "h-[210px]",
     },
@@ -52,20 +52,20 @@ const Projects = () => {
   const row3 = [
     {
       id: 7,
-      src: "/images/exterior.jpg",
+      src: "/images/proj6.jpg",
       width: "w-[210px]",
       height: "h-[210px]",
     },
     {
       id: 8,
-      src: "/images/interior.jpg",
+      src: "/images/proj7.jpg",
       width: "w-[210px]",
       height: "h-[210px]",
     },
-    { id: 9, src: "/images/arch.jpg", width: "w-[210px]", height: "h-[210px]" },
+    { id: 9, src: "/images/proj8.jpg", width: "w-[210px]", height: "h-[210px]" },
     {
       id: 10,
-      src: "/images/service.jpg",
+      src: "/images/proj9.jpg",
       width: "w-[210px]",
       height: "h-[210px]",
     },
@@ -114,7 +114,7 @@ const Projects = () => {
 
       <div className="z-50 flex gap-5 flex-col w-[45%] shrink-0 proj-text">
         <h2
-          className="font-avant text-2xl tracking-[0.2em] font-medium"
+          className="font-avant text-xl tracking-[0.2em] font-medium"
           style={{ color: secondaryColor }}
         >
           RECENT PROJECTS
