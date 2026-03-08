@@ -120,7 +120,7 @@ const Projects = () => {
           RECENT PROJECTS
         </h2>
         <p
-          className="font-bold text-[3.5rem] leading-[1.1]"
+          className="font-bold text-[3.5rem] leading-[1.1] font-avant"
           style={{ color: secondaryColor }}
         >
           A <span style={{ color: primaryColor }}>glimpse</span> into the

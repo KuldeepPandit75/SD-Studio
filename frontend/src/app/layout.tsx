@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar/Navbar";
 
 import LenisProvider from "../components/LenisProvider/LenisProvider";
 import Footer from "../components/Footer/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,6 +65,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <Toaster />
           </LenisProvider>
         </div>
       </body>
