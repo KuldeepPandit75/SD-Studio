@@ -101,7 +101,7 @@ const Projects = () => {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen px-[100px] overflow-hidden relative flex items-center justify-between py-[10vh]"
+      className="min-h-screen px-[20px] sm:px-[100px] overflow-hidden relative flex sm:items-center sm:justify-between py-[10vh] flex-col sm:flex-row"
       style={{ backgroundColor: tertialColor }}
     >
       <Image
@@ -112,15 +112,15 @@ const Projects = () => {
         className="w-full h-full object-cover opacity-20 absolute inset-0 pointer-events-none"
       />
 
-      <div className="z-50 flex gap-5 flex-col w-[45%] shrink-0 proj-text">
+      <div className="z-50 flex gap-5 flex-col w-[70%] sm:w-[45%] shrink-0 proj-text">
         <h2
-          className="font-avant text-xl tracking-[0.2em] font-medium"
+          className="font-avant text-sm sm:text-xl tracking-[0.2em] font-medium"
           style={{ color: secondaryColor }}
         >
           RECENT PROJECTS
         </h2>
         <p
-          className="font-bold text-[3.5rem] leading-[1.1] font-avant"
+          className="font-bold text-[2.5rem] sm:text-[3.5rem] leading-[1.1] font-avant"
           style={{ color: secondaryColor }}
         >
           A <span style={{ color: primaryColor }}>glimpse</span> into the
@@ -131,7 +131,7 @@ const Projects = () => {
 
       <div
         id="proj-gallery"
-        className="z-50 flex flex-col gap-6 w-[65%] h-full justify-center overflow-visible ml-20 group hover:translate-x-[20px] transition-transform duration-700 ease-in-out"
+        className="z-50 flex flex-col gap-6 w-[65%] h-full justify-center overflow-visible ml-20 group hover:translate-x-[20px] transition-transform duration-700 ease-in-out -translate-x-[200px] scale-80"
       >
         {/* Row 1 */}
         <div className="proj-row">

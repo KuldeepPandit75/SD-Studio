@@ -76,7 +76,7 @@ const OurServices = () => {
         </h2>
         <div
           id="cards"
-          className="relative z-10 flex items-center justify-center flex-1 gap-[80px] w-full mt-24"
+          className="relative z-10 flex items-center justify-center flex-1 gap-[80px] w-full mt-24 flex-wrap"
         >
           {services.map((service, idx) => (
             <div

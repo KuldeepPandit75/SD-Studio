@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { useThemeStore } from "@/src/Zustand_Store/ThemeStore";
 import { useGSAP } from "@gsap/react";
@@ -31,6 +31,15 @@ const Testimonials = () => {
   const { tertialColor, secondaryColor } = useThemeStore();
 
   const sectionRef = useRef<HTMLElement>(null);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useGSAP(
     () => {
@@ -66,7 +75,7 @@ const Testimonials = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-24 px-[100px] flex flex-col justify-center min-h-screen py-[80px]"
+      className="px-[20px] sm:px-[100px] flex flex-col justify-center min-h-screen py-[80px]"
       style={{ backgroundColor: secondaryColor }}
     >
       {/* Header */}
@@ -86,12 +95,12 @@ const Testimonials = () => {
         </h2>
       </div>
 
-      {/* Cards */}
-      <div className="flex gap-10 justify-between items-stretch">
+      {/* Cards Desktop */}
+      <div className="sm:flex gap-10 justify-between items-stretch hidden">
         {testimonials.map((testimonial, idx) => (
           <div
             key={idx}
-            className="relative w-1/3 rounded-2xl p-10 flex flex-col scale-90 test-card"
+            className="relative min-w-[350px] w-1/3 rounded-2xl p-10 flex flex-col scale-90 test-card"
             style={{ backgroundColor: tertialColor, color: secondaryColor }}
           >
             {/* Quote Icon */}
@@ -143,6 +152,86 @@ const Testimonials = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Mobile Cards Container */}
+      <div className="sm:hidden flex flex-col items-center mt-4 test-card">
+        <div className="grid w-full">
+          {testimonials.map((testimonial, idx) => (
+            <div
+              key={idx}
+              className={`col-start-1 row-start-1 w-full rounded-2xl p-8 flex flex-col transition-opacity duration-700 ease-in-out ${
+                idx === activeTestimonial
+                  ? "opacity-100 z-10"
+                  : "opacity-0 z-0 pointer-events-none"
+              }`}
+              style={{ backgroundColor: tertialColor, color: secondaryColor }}
+            >
+              {/* Quote Icon */}
+              <div className="absolute -top-6 -right-2 w-20 h-20 select-none pointer-events-none">
+                <Image
+                  src="/icons/‘’.svg"
+                  alt="Quote"
+                  fill
+                  className="object-contain drop-shadow-lg"
+                />
+              </div>
+
+              {/* Top Icon Area */}
+              <div className="mb-6">
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM12 20C9.68 20 7.6 18.9 6.26 17.18C6.31 15.28 10.1 14.2 12 14.2C13.88 14.2 17.69 15.28 17.74 17.18C16.4 18.9 14.32 20 12 20Z"
+                    fill={secondaryColor}
+                  />
+                </svg>
+              </div>
+
+              {/* Text */}
+              <div className="flex-1 mb-[3rem]">
+                <p className="text-base leading-[1.6] text-white/90 font-light font-avant pr-2">
+                  {testimonial.quote}
+                </p>
+              </div>
+
+              {/* Footer */}
+              <div className="mt-auto">
+                <p
+                  className="font-amsterdam text-[1.2rem] tracking-wide leading-none mb-4 text-white/90"
+                  style={{ transform: "rotate(-2deg)" }}
+                >
+                  {testimonial.name}
+                </p>
+                <p className="text-xs text-white/60 font-light font-avant">
+                  {testimonial.role}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Status Bar */}
+        <div className="flex items-center gap-2 mt-8 w-full max-w-[150px]">
+          {testimonials.map((_, idx) => (
+            <div
+              key={idx}
+              className="flex-1 h-[3px] rounded-full transition-all duration-500 ease-in-out cursor-pointer"
+              style={{
+                backgroundColor: tertialColor,
+                opacity: idx === activeTestimonial ? 1 : 0.2,
+              }}
+              onClick={() => setActiveTestimonial(idx)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

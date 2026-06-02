@@ -162,78 +162,158 @@ const Hero = () => {
   }, []);
 
   useGSAP(() => {
-    const tl = gsap.timeline({
-      delay: 1,
-      onComplete: () => {
-        setIsInitialAnimationDone(true);
-        gsap.to("#grid", {
-          y: 20,
-          duration: 2,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      },
-    });
+    const mm = gsap.matchMedia();
 
-    tl.to("#hero-text", {
-      bottom: "18vh",
-      duration: 1,
-      ease: "power2.out",
-    });
+    mm.add("(min-width: 640px)", () => {
+      const tl = gsap.timeline({
+        delay: 1,
+        onComplete: () => {
+          setIsInitialAnimationDone(true);
+          gsap.to("#grid", {
+            y: 20,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        },
+      });
 
-    tl.to(
-      "#gallery",
-      {
-        bottom: "-2.5rem",
+      tl.to("#hero-text", {
+        bottom: "24vh",
         duration: 1,
         ease: "power2.out",
-      },
-      "<",
-    );
+      });
 
-    tl.add("spread", "-=0.4");
-
-    cardsRef.current.forEach((card, index) => {
-      if (!card) return;
-      const slotIndex = positions[index];
-      const slot = SLOTS[slotIndex];
       tl.to(
-        card,
+        "#gallery",
         {
-          x: slot.x,
-          rotateZ: slot.rotateZ,
-          scale: slot.scale,
-          zIndex: slot.zIndex,
-          opacity: slot.opacity,
+          bottom: "-2.5rem",
           duration: 1,
           ease: "power2.out",
         },
-        "spread",
+        "<",
       );
+
+      tl.add("spread", "-=0.4");
+
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        const slotIndex = positions[index];
+        const slot = SLOTS[slotIndex];
+        tl.to(
+          card,
+          {
+            x: slot.x,
+            rotateZ: slot.rotateZ,
+            scale: slot.scale,
+            zIndex: slot.zIndex,
+            opacity: slot.opacity,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "spread",
+        );
+      });
+
+      tl.to(
+        "#grid",
+        {
+          bottom: 0,
+          rotateZ: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      );
+      const tl2 = gsap.timeline();
+      tl2.to("#hero", {
+        y: 80,
+        ease: "power2.out",
+      });
+      ScrollTrigger.create({
+        trigger: "#hero",
+        start: "top 100px",
+        end: "bottom top",
+        scrub: 1,
+        animation: tl2,
+      });
     });
 
-    tl.to(
-      "#grid",
-      {
-        bottom: 0,
-        rotateZ: 0,
-        duration: 0.8,
+    mm.add("(max-width: 639px)", () => {
+      const tl = gsap.timeline({
+        delay: 1,
+        onComplete: () => {
+          setIsInitialAnimationDone(true);
+          gsap.to("#grid", {
+            y: 20,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        },
+      });
+
+      tl.to("#hero-text", {
+        bottom: "180px",
+        duration: 1,
         ease: "power2.out",
-      },
-      "-=0.4",
-    );
-    const tl2 = gsap.timeline();
-    tl2.to("#hero", {
-      y: 80,
-      ease: "power2.out",
-    });
-    ScrollTrigger.create({
-      trigger: "#hero",
-      start: "top 100px",
-      end: "bottom top",
-      scrub: 1,
-      animation: tl2,
+      });
+
+      tl.to(
+        "#gallery",
+        {
+          bottom: "-2vh",
+          duration: 1,
+          ease: "power2.out",
+        },
+        "<",
+      );
+
+      tl.add("spread", "-=0.4");
+
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        const slotIndex = positions[index];
+        const slot = SLOTS[slotIndex];
+        tl.to(
+          card,
+          {
+            x: slot.x,
+            rotateZ: slot.rotateZ,
+            scale: slot.scale,
+            zIndex: slot.zIndex,
+            opacity: slot.opacity,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "spread",
+        );
+      });
+
+      tl.to(
+        "#grid",
+        {
+          bottom: 0,
+          rotateZ: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      );
+      const tl2 = gsap.timeline();
+      tl2.to("#hero", {
+        y: 80,
+        ease: "power2.out",
+      });
+      ScrollTrigger.create({
+        trigger: "#hero",
+        start: "top 100px",
+        end: "bottom top",
+        scrub: 1,
+        animation: tl2,
+      });
     });
   }, []); // Run once on mount!
 
@@ -268,13 +348,13 @@ const Hero = () => {
         ></div>
         <div
           id="hero-text"
-          className="h-[calc(100vh-100px)] flex flex-col justify-center items-center gap-5 relative bottom-[4vh] z-10 pointer-events-none"
+          className="sm:h-[calc(100vh-100px)] h-[calc(100vh-80px)] flex flex-col justify-center items-center gap-5 relative bottom-[4vh] z-10 pointer-events-none"
         >
-          <h1 className="text-center font-avant font-bold text-5xl w-[60vw]">
+          <h1 className="text-center font-avant font-bold text-[clamp(14px,4vh,48px)] sm:text-[clamp(34px,4vw,48px)] sm:w-[60vw] w-[80vw]">
             Bringing Architecture to Life with Stunning Visuals.
           </h1>
           <p
-            className="text-center font-beach text-3xl w-[40vw]"
+            className="text-center font-beach text-[clamp(12px,2vh,30px)] sm:text-[clamp(20px,1vw,30px)] w-[60vw] sm:w-[40vw]"
             style={{ color: primaryColor }}
           >
             From interior design to architectural planning and 3D modeling, we
@@ -291,7 +371,7 @@ const Hero = () => {
               ref={(el) => {
                 cardsRef.current[idx] = el;
               }}
-              className="absolute w-[600px] h-[350px] rounded-[28px] overflow-hidden border-[#FFF3E9] border-2 shadow-xl origin-bottom"
+              className="absolute w-[90%] h-[225px] sm:w-[600px] sm:h-[350px] rounded-[28px] overflow-hidden border-[#FFF3E9] border-2 shadow-xl origin-bottom"
               style={{
                 zIndex: idx === 1 ? 20 : 10, // Initial stacking before GSAP spreads them
               }}
@@ -301,7 +381,7 @@ const Hero = () => {
                   videosRef.current[idx] = el;
                 }}
                 src={src}
-                className={`object-cover w-full h-full ${src=="/videos/landscape.mp4"?"scale-130": "scale-110"}`}
+                className={`object-cover w-full h-full ${src == "/videos/landscape.mp4" ? "scale-130" : "scale-110"}`}
                 muted
                 playsInline
                 onEnded={() => handleVideoEnded(idx)}
