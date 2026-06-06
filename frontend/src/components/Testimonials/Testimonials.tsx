@@ -32,14 +32,69 @@ const Testimonials = () => {
 
   const sectionRef = useRef<HTMLElement>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const lastFrameTimeRef = useRef<number>(0);
+  const accumulatedTimeRef = useRef<number>(0);
+  const touchStartRef = useRef<number>(0);
+
+  // Reset progress when activeTestimonial changes
+  useEffect(() => {
+    accumulatedTimeRef.current = 0;
+    setProgress(0);
+  }, [activeTestimonial]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    let animationFrameId: number;
 
-    return () => clearInterval(interval);
-  }, []);
+    const animateProgress = (timestamp: number) => {
+      if (!lastFrameTimeRef.current) {
+        lastFrameTimeRef.current = timestamp;
+      }
+
+      const deltaTime = timestamp - lastFrameTimeRef.current;
+      lastFrameTimeRef.current = timestamp;
+
+      if (!isPaused) {
+        accumulatedTimeRef.current += deltaTime;
+        const newProgress = Math.min((accumulatedTimeRef.current / 5000) * 100, 100);
+        setProgress(newProgress);
+
+        if (accumulatedTimeRef.current >= 5000) {
+          setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animateProgress);
+    };
+
+    animationFrameId = requestAnimationFrame(animateProgress);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lastFrameTimeRef.current = 0;
+    };
+  }, [isPaused]);
+
+  const handlePointerDown = () => {
+    touchStartRef.current = Date.now();
+    setIsPaused(true);
+  };
+
+  const handlePointerUp = () => {
+    setIsPaused(false);
+    const touchDuration = Date.now() - touchStartRef.current;
+    if (touchDuration < 200) {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }
+  };
+
+  const handlePointerLeave = () => {
+    if (isPaused) {
+      setIsPaused(false);
+    }
+  };
 
   useGSAP(
     () => {
@@ -96,7 +151,7 @@ const Testimonials = () => {
       </div>
 
       {/* Cards Desktop */}
-      <div className="sm:flex gap-10 justify-between items-stretch hidden">
+      <div className="sm:flex gap-10 justify-between items-stretch hidden select-none">
         {testimonials.map((testimonial, idx) => (
           <div
             key={idx}
@@ -133,7 +188,7 @@ const Testimonials = () => {
 
             {/* Text */}
             <div className="flex-1 mb-[5rem]">
-              <p className="text-lg leading-[1.6] text-white/90 font-light font-avant pr-4">
+              <p className="text-lg leading-[1.6] text-white/90 font-light font-avant pr-4 select-none">
                 {testimonial.quote}
               </p>
             </div>
@@ -156,7 +211,13 @@ const Testimonials = () => {
 
       {/* Mobile Cards Container */}
       <div className="sm:hidden flex flex-col items-center mt-4 test-card">
-        <div className="grid w-full">
+        <div 
+          className="grid w-full"
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={handlePointerLeave}
+          onPointerCancel={handlePointerLeave}
+        >
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
@@ -220,17 +281,30 @@ const Testimonials = () => {
 
         {/* Status Bar */}
         <div className="flex items-center gap-2 mt-8 w-full max-w-[150px]">
-          {testimonials.map((_, idx) => (
-            <div
-              key={idx}
-              className="flex-1 h-[3px] rounded-full transition-all duration-500 ease-in-out cursor-pointer"
-              style={{
-                backgroundColor: tertialColor,
-                opacity: idx === activeTestimonial ? 1 : 0.2,
-              }}
-              onClick={() => setActiveTestimonial(idx)}
-            />
-          ))}
+          {testimonials.map((_, idx) => {
+            const isActive = idx === activeTestimonial;
+            return (
+              <div
+                key={idx}
+                className="relative flex-1 h-[3px] rounded-full cursor-pointer overflow-hidden transition-all duration-500 ease-in-out"
+                onClick={() => setActiveTestimonial(idx)}
+              >
+                {/* Track background */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{ backgroundColor: tertialColor, opacity: 0.2 }}
+                />
+                {/* Progress foreground */}
+                <div
+                  className="absolute top-0 left-0 h-full rounded-full transition-none"
+                  style={{
+                    width: isActive ? `${progress}%` : "0%",
+                    backgroundColor: tertialColor,
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

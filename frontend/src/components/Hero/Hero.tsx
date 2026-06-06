@@ -188,7 +188,7 @@ const Hero = () => {
       tl.to(
         "#gallery",
         {
-          bottom: "-2.5rem",
+          bottom: "-4rem",
           duration: 1,
           ease: "power2.out",
         },
@@ -256,7 +256,7 @@ const Hero = () => {
       });
 
       tl.to("#hero-text", {
-        bottom: "180px",
+        bottom: "160px",
         duration: 1,
         ease: "power2.out",
       });
@@ -264,7 +264,7 @@ const Hero = () => {
       tl.to(
         "#gallery",
         {
-          bottom: "-2vh",
+          bottom: "-7vh",
           duration: 1,
           ease: "power2.out",
         },
@@ -350,11 +350,11 @@ const Hero = () => {
           id="hero-text"
           className="sm:h-[calc(100vh-100px)] h-[calc(100vh-80px)] flex flex-col justify-center items-center gap-5 relative bottom-[4vh] z-10 pointer-events-none"
         >
-          <h1 className="text-center font-avant font-bold text-[clamp(14px,4vh,48px)] sm:text-[clamp(34px,4vw,48px)] sm:w-[60vw] w-[80vw]">
+          <h1 className="text-center font-avant font-bold text-[clamp(14px,4vh,48px)] sm:text-[clamp(34px,4vw,42px)] sm:w-[60vw] w-[80vw]">
             Bringing Architecture to Life with Stunning Visuals.
           </h1>
           <p
-            className="text-center font-beach text-[clamp(12px,2vh,30px)] sm:text-[clamp(20px,1vw,30px)] w-[60vw] sm:w-[40vw]"
+            className="text-center font-beach text-[clamp(12px,5vw,32px)] sm:text-[clamp(20px,2vw,36px)] w-[70vw] sm:w-[55vw]"
             style={{ color: primaryColor }}
           >
             From interior design to architectural planning and 3D modeling, we
@@ -391,7 +391,7 @@ const Hero = () => {
           ))}
 
           {/* Tracking Bar */}
-          <div className="absolute bottom-14 flex items-center gap-3 z-30 px-6 py-3 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl">
+          <div className="absolute bottom-18 flex items-center gap-3 z-30 px-6 py-3 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl">
             {[1, 0, 2].map((idx) => {
               const isActive = positions[idx] === 1;
               return (

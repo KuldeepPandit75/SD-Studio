@@ -58,7 +58,7 @@ const OurServices = () => {
     <>
       <div
         ref={sectionRef}
-        className="relative py-[150px] min-h-[105vh] flex flex-col items-center overflow-hidden"
+        className="relative py-[150px] min-h-[105vh] flex flex-col items-center overflow-hidden px-[20px]"
       >
         <video
           src="/videos/arch.mp4"
@@ -69,7 +69,7 @@ const OurServices = () => {
         />
         <div className="absolute inset-0 bg-black/75 z-0 pointer-events-none"></div>
         <h2
-          className="relative z-10 font-avant text-4xl text-center services-title"
+          className="relative z-10 font-avant text-4xl text-center services-title underline underline-offset-12 decoration-1" 
           style={{ color: secondaryColor }}
         >
           What <b>We Do</b>

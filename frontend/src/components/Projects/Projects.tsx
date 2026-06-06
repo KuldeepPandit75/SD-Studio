@@ -131,7 +131,7 @@ const Projects = () => {
 
       <div
         id="proj-gallery"
-        className="z-50 flex flex-col gap-6 w-[65%] h-full justify-center overflow-visible ml-20 group hover:translate-x-[20px] transition-transform duration-700 ease-in-out -translate-x-[200px] scale-80"
+        className="z-50 flex flex-col gap-6 w-[65%] h-full justify-center overflow-visible ml-20 group hover:translate-x-[20px] transition-transform duration-700 ease-in-out -translate-x-[200px] sm:translate-x-0 sm:scale-100 scale-80"
       >
         {/* Row 1 */}
         <div className="proj-row">
