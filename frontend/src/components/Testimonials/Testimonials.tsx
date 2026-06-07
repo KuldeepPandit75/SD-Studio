@@ -130,7 +130,7 @@ const Testimonials = () => {
   return (
     <section
       ref={sectionRef}
-      className="px-[20px] sm:px-[100px] flex flex-col justify-center min-h-screen py-[80px]"
+      className="px-[20px] sm:px-[80px] flex flex-col justify-center min-h-screen py-[80px]"
       style={{ backgroundColor: secondaryColor }}
     >
       {/* Header */}
@@ -196,7 +196,7 @@ const Testimonials = () => {
             {/* Footer */}
             <div className="mt-auto">
               <p
-                className="font-amsterdam text-[1.5rem] tracking-wide leading-none mb-3 text-white/90 mb-10"
+                className="font-amsterdam text-[1.5rem] tracking-wide leading-none mb-6 text-white/90"
                 style={{ transform: "rotate(-2deg)" }}
               >
                 {testimonial.name}

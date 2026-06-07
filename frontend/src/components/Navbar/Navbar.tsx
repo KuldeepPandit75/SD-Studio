@@ -5,6 +5,7 @@ import { useThemeStore } from "@/src/Zustand_Store/ThemeStore";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Link from "next/link";
 
 const Navbar = () => {
   const { primaryColor, secondaryColor,tertialColor } = useThemeStore();
@@ -147,13 +148,13 @@ const Navbar = () => {
         <div id="nav-links" className="hidden md:block">
           <ul className="flex w-[25vw] justify-between font-bold text-lg">
             <li className="opacity-0">
-              <a href="#">Services</a>
+              <Link href="/services">Services</Link>
             </li>
             <li className="opacity-0">
-              <a href="#">Projects</a>
+              <Link href="/project">Projects</Link>
             </li>
             <li className="opacity-0">
-              <a href="#">About</a>
+              <Link href="/about">About</Link>
             </li>
           </ul>
         </div>
@@ -207,12 +208,12 @@ const Navbar = () => {
         >
           <div className="flex flex-col px-8 py-10 gap-2">
             {[
-              { name: "Services", href: "#" },
-              { name: "Projects", href: "#" },
-              { name: "About", href: "#" },
+              { name: "Services", href: "/services" },
+              { name: "Projects", href: "/project" },
+              { name: "About", href: "/about" },
             ].map((item, i) => (
               <div key={item.name}>
-                <a
+                <Link
                   href={item.href}
                   className={`group flex items-center justify-between py-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     isMenuOpen
@@ -229,7 +230,7 @@ const Navbar = () => {
                   <span className="opacity-50 transform group-hover:translate-x-2 transition-transform duration-300">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                   </span>
-                </a>
+                </Link>
                 <div 
                   className="w-full h-[1px] opacity-10" 
                   style={{ backgroundColor: primaryColor }}

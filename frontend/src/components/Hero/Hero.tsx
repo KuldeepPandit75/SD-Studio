@@ -188,7 +188,7 @@ const Hero = () => {
       tl.to(
         "#gallery",
         {
-          bottom: "-4rem",
+          bottom: "-2rem",
           duration: 1,
           ease: "power2.out",
         },
@@ -357,8 +357,7 @@ const Hero = () => {
             className="text-center font-beach text-[clamp(12px,5vw,32px)] sm:text-[clamp(20px,2vw,36px)] w-[70vw] sm:w-[55vw]"
             style={{ color: primaryColor }}
           >
-            From interior design to architectural planning and 3D modeling, we
-            bring your ideas to life.
+            Building your dream home? We help homeowners visualize and design every detail before construction begins.
           </p>
         </div>
         <div
