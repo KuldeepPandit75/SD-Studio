@@ -91,9 +91,14 @@ export default function ServicesShowcase() {
       </div>
 
       {/* Tabs Navigation */}
-      <div className="showcase-tabs max-w-7xl mx-auto mb-10 sm:mb-16">
+      <div className="showcase-tabs max-w-7xl mx-auto mb-10 sm:mb-16 relative">
+        {/* Mobile horizontal scroll hint fade */}
+        <div 
+          className="md:hidden absolute right-0 top-0 bottom-[17px] w-12 sm:w-20 pointer-events-none z-10" 
+          style={{ background: `linear-gradient(to right, transparent, ${secondaryColor})` }} 
+        />
         <div
-          className="flex overflow-x-auto hide-scrollbar gap-2 sm:gap-3 pb-4 border-b"
+          className="flex overflow-x-auto hide-scrollbar gap-2 sm:gap-3 pb-4 border-b -mx-5 px-5 sm:mx-0 sm:px-0"
           style={{ borderColor: `${tertialColor}15` }}
         >
           {services.map((s, idx) => {
