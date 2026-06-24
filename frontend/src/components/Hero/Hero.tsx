@@ -180,7 +180,7 @@ const Hero = () => {
       });
 
       tl.to("#hero-text", {
-        bottom: "24vh",
+        bottom: "20vh",
         duration: 1,
         ease: "power2.out",
       });
@@ -348,7 +348,7 @@ const Hero = () => {
         ></div>
         <div
           id="hero-text"
-          className="sm:h-[calc(100vh-100px)] h-[calc(100vh-80px)] flex flex-col justify-center items-center gap-5 relative bottom-[4vh] z-10 pointer-events-none"
+          className="sm:h-[calc(100vh)] h-[calc(100vh)] flex flex-col justify-center items-center gap-5 relative bottom-[4vh] z-10 pointer-events-none"
         >
           <h1 className="text-center font-avant font-bold text-[clamp(14px,4vh,48px)] sm:text-[clamp(34px,4vw,42px)] sm:w-[60vw] w-[80vw]">
             Bringing Architecture to Life with Stunning Visuals.

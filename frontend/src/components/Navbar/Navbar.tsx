@@ -6,10 +6,13 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const { primaryColor, secondaryColor,tertialColor } = useThemeStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isServicesPage = pathname === "/services";
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -100,10 +103,10 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="relative top-0 w-full flex justify-between items-center font-avant h-[80px] sm:h-[100px] px-[20px] sm:px-[3vw] z-[100]">
-        <div id="logo" className="flex items-center gap-[10px] sm:gap-[40px] relative">
+      <header className="absolute top-0 w-full flex justify-between items-center font-avant h-[80px] sm:h-[100px] px-[20px] sm:px-[3vw] z-[100]">
+        <div id="logo" className={`flex items-center gap-[10px] sm:gap-[40px] relative ${isServicesPage ? "" : "mix-blend-difference"}`}>
           <Image
-            src="/icons/logoB.svg"
+            src={isServicesPage ? "/icons/logoG.svg" : "/icons/logoB.svg"}
             id="logoImg"
             alt="Logo"
             className="opacity-0 w-[50px] sm:w-[60px]"
@@ -113,6 +116,7 @@ const Navbar = () => {
           <span
             id="logoText"
             className="relative bottom-1 overflow-hidden w-[100px]"
+            style={{ color: isServicesPage ? secondaryColor : "inherit" }}
           >
             <p className="font-black text-3xl sm:text-4xl py-1 opacity-0" id="sd">
               SD
@@ -120,6 +124,7 @@ const Navbar = () => {
             <p
               id="studio"
               className="font-beach opacity-0 text-xl sm:text-2xl absolute top-[20px] left-[40px]"
+              style={{color: primaryColor}}
             >
               Studio
             </p>
@@ -128,24 +133,28 @@ const Navbar = () => {
             <div className="relative opacity-70 flex flex-col gap-1">
               <hr
                 id="line1"
-                className="border-black absolute -left-[3vw] -top-[35px] w-[200px] opacity-0"
+                className="absolute -left-[3vw] -top-[35px] w-[200px] opacity-0"
+                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
               />
               <hr
                 id="line2"
-                className="border-black absolute -left-[3vw] -bottom-[35px] w-[160px] opacity-0"
+                className="absolute -left-[3vw] -bottom-[35px] w-[160px] opacity-0"
+                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
               />
               <hr
                 id="line3"
-                className="border-black absolute -left-[50px] rotate-90 w-[250px] opacity-0"
+                className="absolute -left-[50px] rotate-90 w-[250px] opacity-0"
+                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
               />
               <hr
                 id="line4"
-                className="border-black absolute -left-[340px] rotate-90 w-[650px] opacity-0"
+                className="absolute -left-[340px] rotate-90 w-[650px] opacity-0"
+                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
               />
             </div>
           </div>
         </div>
-        <div id="nav-links" className="hidden md:block">
+        <div id="nav-links" className="hidden md:block" style={{ color: isServicesPage ? secondaryColor : "inherit" }}>
           <ul className="flex w-[25vw] justify-between font-bold text-lg">
             <li className="opacity-0">
               <Link href="/services">Services</Link>

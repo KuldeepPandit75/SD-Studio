@@ -9,116 +9,115 @@ import ProjectCard, { type ProjectData } from "./ProjectCard";
 const PROJECTS: ProjectData[] = [
   {
     id: 1,
-    name: "The Verdant\nRetreat",
-    type: "Villa",
-    location: "Goa, India",
-    status: "Completed",
-    size: "4,500 sq ft",
-    image: "/images/proj1.jpg",
-    year: "2024",
+    name: "Nirvana\nGuraidhoo",
+    type: "Commercial",
+    location: "Guraidhoo Island, Maldives",
+    status: "Ongoing",
+    size: "250 sq mtr",
+    image: "/images/interior.jpg",
+    year: "2026",
     orientation: "landscape",
   },
   {
     id: 2,
-    name: "Horizon\nResidence",
+    name: "Apex\nHouse",
     type: "Residence",
-    location: "Mumbai, India",
-    status: "Completed",
-    size: "3,200 sq ft",
+    location: "Sector 12, Noida (Near Adobe Regional Office)",
+    status: "Ongoing",
+    size: "250 sq mtr",
     image: "/images/proj2.jpg",
-    year: "2024",
+    year: "2025",
     orientation: "portrait",
   },
   {
     id: 3,
-    name: "Atlas\nCommerce Hub",
-    type: "Commercial",
-    location: "Pune, India",
+    name: "The Grand\mFrame",
+    type: "Residence",
+    location: "Sector 100, Noida",
     status: "Ongoing",
-    size: "12,000 sq ft",
+    size: "250 sq mtr",
     image: "/images/proj3.jpg",
     year: "2025",
     orientation: "landscape",
   },
   {
     id: 4,
-    name: "Minimal\nLiving",
-    type: "Interior",
-    location: "Bangalore, India",
-    status: "Completed",
-    size: "1,800 sq ft",
-    image: "/images/interior.jpg",
-    year: "2023",
+    name: "The Obsidian\nHouse",
+    type: "Residence",
+    location: "Sector Delta 3, Greater Noida",
+    status: "Ongoing",
+    size: "450 sq mtr",
+    image: "/images/proj1.jpg",
+    year: "2026",
     orientation: "landscape",
   },
   {
     id: 5,
-    name: "The Glass\nPavilion",
-    type: "Office",
-    location: "Hyderabad, India",
-    status: "Concept",
-    size: "8,500 sq ft",
+    name: "Urban Oasis\nRooftop",
+    type: "Commercial (Terrace Garden)",
+    location: "Salendpur Village, Begusarai, Bihar",
+    status: "Ongoing",
+    size: "400 sq m",
     image: "/images/proj5.jpg",
     year: "2025",
     orientation: "landscape",
   },
   {
     id: 6,
-    name: "Serenity\nGardens",
-    type: "Landscape",
-    location: "Jaipur, India",
+    name: "The Nexus\nResidence",
+    type: "Residence",
+    location: "Sector 100, Noida",
     status: "Ongoing",
-    size: "6,200 sq ft",
+    size: "250 sq mtr",
     image: "/images/proj6.jpg",
     year: "2025",
     orientation: "portrait",
   },
   {
     id: 7,
-    name: "Oakwood\nManor",
-    type: "Villa",
-    location: "Dehradun, India",
-    status: "Completed",
-    size: "5,800 sq ft",
+    name: "Arcadia\nResidence",
+    type: "Residence",
+    location: "Sector 63, Noida",
+    status: "Ongoing",
+    size: "450 sq mtr",
     image: "/images/proj7.jpg",
-    year: "2023",
+    year: "2025",
     orientation: "landscape",
   },
   {
     id: 8,
-    name: "Urban\nElevation",
-    type: "Mixed Use",
-    location: "Delhi, India",
+    name: "Canopy\nHouse",
+    type: "Residence",
+    location: "Sector 63, Noida",
     status: "Ongoing",
-    size: "15,000 sq ft",
+    size: "450 sq mtr",
     image: "/images/exterior.jpg",
     year: "2025",
     orientation: "landscape",
   },
   {
     id: 9,
-    name: "Terra\nVista",
+    name: "The Linear\nResidence",
     type: "Residence",
-    location: "Chennai, India",
-    status: "Completed",
-    size: "2,900 sq ft",
+    location: "Sector 51, Noida",
+    status: "Ongoing",
+    size: "93 sq mtr",
     image: "/images/proj9.jpg",
-    year: "2024",
+    year: "2026",
     orientation: "landscape",
   },
   {
     id: 10,
-    name: "The Canopy\nSuite",
-    type: "Interior",
-    location: "Kolkata, India",
-    status: "Concept",
-    size: "2,100 sq ft",
+    name: "The Guest\nHouse",
+    type: "Commercial",
+    location: "Sector 117, Noida",
+    status: "Completed",
+    size: "340 sq mtr",
     image: "/images/proj10.jpg",
     year: "2025",
     orientation: "landscape",
   },
 ];
-
 
 const TOTAL = PROJECTS.length;
 
@@ -157,37 +156,35 @@ const ProjectsShowcase = () => {
   }, []);
 
   // Snap to a neighboring card
-  const snapTo = useCallback(
-    (direction: 1 | -1) => {
-      // direction: 1 = swipe up (go to next), -1 = swipe down (go to prev)
-      if (isAnimating.current) return;
-      isAnimating.current = true;
+  const snapTo = useCallback((direction: 1 | -1) => {
+    // direction: 1 = swipe up (go to next), -1 = swipe down (go to prev)
+    if (isAnimating.current) return;
+    isAnimating.current = true;
 
-      const targetY = direction === 1
-        ? -window.innerHeight  // move track up → reveals next card
-        : window.innerHeight;  // move track down → reveals prev card
+    const targetY =
+      direction === 1
+        ? -window.innerHeight // move track up → reveals next card
+        : window.innerHeight; // move track down → reveals prev card
 
-      gsap.to(trackRef.current, {
-        y: targetY,
-        duration: 0.45,
-        ease: "power2.out",
-        onComplete: () => {
-          // flushSync forces React to re-render the DOM synchronously
-          // BEFORE we reset the track position. This prevents the 1-2 frame
-          // jitter where the track is at y:0 but still showing old card content.
-          flushSync(() => {
-            setCurrentIndex((prev) => wrapIndex(prev + direction));
-          });
-          // Now the DOM has new prev/current/next cards rendered.
-          // Reset track — the on-screen card stays visually in the same spot.
-          offsetY.current = 0;
-          gsap.set(trackRef.current, { y: 0 });
-          isAnimating.current = false;
-        },
-      });
-    },
-    [],
-  );
+    gsap.to(trackRef.current, {
+      y: targetY,
+      duration: 0.45,
+      ease: "power2.out",
+      onComplete: () => {
+        // flushSync forces React to re-render the DOM synchronously
+        // BEFORE we reset the track position. This prevents the 1-2 frame
+        // jitter where the track is at y:0 but still showing old card content.
+        flushSync(() => {
+          setCurrentIndex((prev) => wrapIndex(prev + direction));
+        });
+        // Now the DOM has new prev/current/next cards rendered.
+        // Reset track — the on-screen card stays visually in the same spot.
+        offsetY.current = 0;
+        gsap.set(trackRef.current, { y: 0 });
+        isAnimating.current = false;
+      },
+    });
+  }, []);
 
   // Snap back to current card
   const snapBack = useCallback(() => {
@@ -308,9 +305,8 @@ const ProjectsShowcase = () => {
       isAnimating.current = true;
 
       const direction = targetIdx > currentIndex ? 1 : -1;
-      const targetY = direction === 1
-        ? -window.innerHeight
-        : window.innerHeight;
+      const targetY =
+        direction === 1 ? -window.innerHeight : window.innerHeight;
 
       // Temporarily swap the prev/next card content to the target
       // by setting index, then animate
@@ -405,10 +401,7 @@ const ProjectsShowcase = () => {
           className="absolute left-0 w-full"
           style={{ height: "100%", top: "-100%" }}
         >
-          <ProjectCard
-            project={PROJECTS[prevIndex]}
-            isActive={false}
-          />
+          <ProjectCard project={PROJECTS[prevIndex]} isActive={false} />
         </div>
 
         {/* Current card: positioned at 0 */}
@@ -427,10 +420,7 @@ const ProjectsShowcase = () => {
           className="absolute left-0 w-full"
           style={{ height: "100%", top: "100%" }}
         >
-          <ProjectCard
-            project={PROJECTS[nextIndex]}
-            isActive={false}
-          />
+          <ProjectCard project={PROJECTS[nextIndex]} isActive={false} />
         </div>
       </div>
 
@@ -454,9 +444,7 @@ const ProjectsShowcase = () => {
                 backgroundColor:
                   idx === currentIndex ? primaryColor : `${secondaryColor}25`,
                 boxShadow:
-                  idx === currentIndex
-                    ? `0 0 10px ${primaryColor}50`
-                    : "none",
+                  idx === currentIndex ? `0 0 10px ${primaryColor}50` : "none",
               }}
             />
           </button>
