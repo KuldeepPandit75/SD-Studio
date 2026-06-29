@@ -11,11 +11,19 @@ export interface ProjectData {
   name: string;
   type: string;
   location: string;
-  status: "Completed" | "Ongoing" | "Concept";
+  status: string;
   size: string;
   image: string;
   year: string;
-  orientation: "landscape" | "portrait";
+  orientation: string;
+  description?: string;
+  scope?: string[];
+  gallery?: string[];
+  highlights?: string[];
+  client?: {
+    name: string;
+    quote: string;
+  };
 }
 
 const TYPE_COLORS: Record<string, string> = {
