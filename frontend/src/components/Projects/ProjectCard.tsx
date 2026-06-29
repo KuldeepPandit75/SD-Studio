@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useThemeStore } from "@/src/Zustand_Store/ThemeStore";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 
 export interface ProjectData {
@@ -45,6 +45,22 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
   const typeColor = TYPE_COLORS[project.type] || "#7A9E7E";
   const statusConfig = STATUS_CONFIG[project.status];
 
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const mql = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  const showGalleryLayout = mounted
+    ? (!isDesktop && isLandscape)
+    : isLandscape; // SSR fallback
+
   // Ken Burns slow zoom on active card
   useEffect(() => {
     if (!imageRef.current) return;
@@ -55,17 +71,17 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
       gsap.fromTo(
         imgEl,
         { scale: 1 },
-        { scale: isLandscape ? 1.04 : 1.08, duration: 8, ease: "none" },
+        { scale: showGalleryLayout ? 1.04 : 1.08, duration: 8, ease: "none" },
       );
     } else {
       gsap.set(imgEl, { scale: 1 });
     }
-  }, [isActive, isLandscape]);
+  }, [isActive, showGalleryLayout]);
 
 
 
-  // ─── LANDSCAPE LAYOUT: "Gallery Exhibition" Frame ────────────────────
-  if (isLandscape) {
+  // ─── GALLERY LAYOUT: Centered Frame ────────────────────
+  if (showGalleryLayout) {
     return (
       <div
         className="absolute inset-0 w-full h-full overflow-hidden flex flex-col"
@@ -91,10 +107,11 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
         <div className="flex-1 flex items-center justify-center px-5 pt-3 pb-2">
           <div
             ref={imageRef}
-            className="relative w-full rounded-2xl overflow-hidden"
+            className="relative w-full rounded-2xl overflow-hidden shrink-0"
             style={{
-              aspectRatio: "16 / 9",
-              maxHeight: "42vh",
+              aspectRatio: isLandscape ? "16 / 9" : "3 / 4",
+              maxWidth: isLandscape ? "calc(42vh * 16 / 9)" : "calc(60vh * 3 / 4)",
+              maxHeight: isLandscape ? "42vh" : "60vh",
               boxShadow: `0 24px 64px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px ${secondaryColor}08`,
             }}
           >
@@ -242,22 +259,30 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
     );
   }
 
-  // ─── PORTRAIT / DEFAULT LAYOUT: Full-bleed immersive ─────────────────
+  // ─── FULL-BLEED / DEFAULT LAYOUT: Immersive ─────────────────
+  const isCenterPillar = mounted && isDesktop && !isLandscape;
+
   return (
     <div
       className="absolute inset-0 w-full h-full overflow-hidden"
       style={{ backgroundColor: tertialColor }}
     >
-      {/* Hero Image — full bleed */}
-      <div ref={imageRef} className="absolute inset-0 w-full h-full">
-        <Image
-          src={project.image}
-          alt={project.name}
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority={isActive}
-        />
+      {/* Hero Image */}
+      <div className="absolute inset-0 w-full h-full flex justify-center items-center">
+        <div
+          ref={imageRef}
+          className={isCenterPillar ? "relative h-full shrink-0" : "absolute inset-0 w-full h-full"}
+          style={isCenterPillar ? { aspectRatio: "3 / 4" } : {}}
+        >
+          <Image
+            src={project.image}
+            alt={project.name}
+            fill
+            className="object-cover"
+            sizes={isCenterPillar ? "50vw" : "100vw"}
+            priority={isActive}
+          />
+        </div>
       </div>
 
       {/* Gradient overlays */}

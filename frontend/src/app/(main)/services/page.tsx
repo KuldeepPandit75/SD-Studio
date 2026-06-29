@@ -25,7 +25,7 @@ export default function ServicesPage() {
       <Toolkit />
       <StatsSection />
       {/* <WhyChooseUs /> */}
-      <FaqSection />
+      {/* <FaqSection /> */}
       <CtaSection />
     </main>
   );

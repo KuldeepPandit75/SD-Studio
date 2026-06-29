@@ -201,3 +201,29 @@ body{
     @apply font-sans;
   }
 }
+
+@keyframes spin-z {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.rotate {
+  animation: spin-z 4s linear infinite;
+}
+
+@keyframes carousel-spin-y {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.animate-carousel {
+  animation: carousel-spin-y 30s linear infinite;
+}

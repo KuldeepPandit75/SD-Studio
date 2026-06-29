@@ -9,7 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const { primaryColor, secondaryColor,tertialColor } = useThemeStore();
+  const { primaryColor, secondaryColor, tertialColor } = useThemeStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const isServicesPage = pathname === "/services";
@@ -104,7 +104,11 @@ const Navbar = () => {
   return (
     <>
       <header className="absolute top-0 w-full flex justify-between items-center font-avant h-[80px] sm:h-[100px] px-[20px] sm:px-[3vw] z-[100]">
-        <div id="logo" className={`flex items-center gap-[10px] sm:gap-[40px] relative ${isServicesPage ? "" : "mix-blend-difference"}`}>
+        <Link
+          href="/"
+          id="logo"
+          className={`flex items-center gap-[10px] sm:gap-[40px] select-none relative ${isServicesPage ? "" : "mix-blend-difference"}`}
+        >
           <Image
             src={isServicesPage ? "/icons/logoG.svg" : "/icons/logoB.svg"}
             id="logoImg"
@@ -118,13 +122,16 @@ const Navbar = () => {
             className="relative bottom-1 overflow-hidden w-[100px]"
             style={{ color: isServicesPage ? secondaryColor : "inherit" }}
           >
-            <p className="font-black text-3xl sm:text-4xl py-1 opacity-0" id="sd">
+            <p
+              className="font-black text-3xl sm:text-4xl py-1 opacity-0"
+              id="sd"
+            >
               SD
             </p>
             <p
               id="studio"
               className="font-beach opacity-0 text-xl sm:text-2xl absolute top-[20px] left-[40px]"
-              style={{color: primaryColor}}
+              style={{ color: primaryColor }}
             >
               Studio
             </p>
@@ -153,8 +160,12 @@ const Navbar = () => {
               />
             </div>
           </div>
-        </div>
-        <div id="nav-links" className="hidden md:block" style={{ color: isServicesPage ? secondaryColor : "inherit" }}>
+        </Link>
+        <div
+          id="nav-links"
+          className="hidden md:block"
+          style={{ color: isServicesPage ? secondaryColor : "inherit" }}
+        >
           <ul className="flex w-[25vw] justify-between font-bold text-lg">
             <li className="opacity-0">
               <Link href="/services">Services</Link>
@@ -229,34 +240,47 @@ const Navbar = () => {
                       ? "opacity-100 translate-x-0"
                       : "opacity-0 -translate-x-8"
                   }`}
-                  style={{ 
-                    color: tertialColor, 
-                    
+                  style={{
+                    color: tertialColor,
                   }}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <span className="font-avant font-bold text-xl sm:text-4xl tracking-tight ">{item.name}</span>
+                  <span className="font-avant font-bold text-xl sm:text-4xl tracking-tight ">
+                    {item.name}
+                  </span>
                   <span className="opacity-50 transform group-hover:translate-x-2 transition-transform duration-300">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                   </span>
                 </Link>
-                <div 
-                  className="w-full h-[1px] opacity-10" 
+                <div
+                  className="w-full h-[1px] opacity-10"
                   style={{ backgroundColor: primaryColor }}
                 ></div>
               </div>
             ))}
-            
+
             <button
               className={`group flex items-center justify-center w-full rounded-full py-2 mt-8 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  isMenuOpen
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
+                isMenuOpen
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
-              style={{ 
+              style={{
                 color: secondaryColor,
                 backgroundColor: primaryColor,
-                transitionDelay: isMenuOpen ? "400ms" : "0ms" 
+                transitionDelay: isMenuOpen ? "400ms" : "0ms",
               }}
               onClick={() => {
                 setIsMenuOpen(false);
@@ -266,7 +290,9 @@ const Navbar = () => {
                 });
               }}
             >
-              <span className="font-avant font-bold text-xl tracking-wide">Let's Talk</span>
+              <span className="font-avant font-bold text-xl tracking-wide">
+                Let's Talk
+              </span>
             </button>
           </div>
         </div>

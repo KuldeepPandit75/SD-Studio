@@ -9,11 +9,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function LenisProvider({
   children,
+  infinite = false,
 }: {
   children: React.ReactNode;
+  infinite?: boolean;
 }) {
   useEffect(() => {
-    const lenis = new Lenis();
+    const lenis = new Lenis({ infinite });
 
     lenis.on("scroll", ScrollTrigger.update);
 
