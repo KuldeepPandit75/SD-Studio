@@ -166,6 +166,7 @@ export const PROJECTS = [
   {
     id: 1,
     name: "Nirvana\nGuraidhoo",
+    slug: "nirvana-guraidhoo",
     type: "Commercial",
     location: "Guraidhoo Island, Maldives",
     status: "Ongoing",
@@ -173,10 +174,26 @@ export const PROJECTS = [
     image: "/images/projNirvana.jpeg",
     year: "2026",
     orientation: "landscape",
+    description:
+      "A boutique hospitality retreat on Guraidhoo Island that draws from the Maldivian vernacular — open-air circulation, coral stone materiality, and a direct relationship between built form and the Indian Ocean horizon. The design prioritises cross-ventilation and shaded outdoor gathering spaces, creating an architecture that belongs to its place.",
+    scope: ["Master Planning", "Exterior Design", "Landscape", "Interior Concept"],
+    gallery: ["/images/projNirvana.jpeg", "/images/proj5.jpg", "/images/proj6.jpg"],
+    highlights: [
+      "Open-air pavilion structures with thatched roofing",
+      "Coral stone and reclaimed teak material palette",
+      "Infinity-edge pool integrated with natural rock formations",
+      "Cross-ventilated guest suites oriented toward prevailing winds",
+    ],
+    client: {
+      name: "Abdulla Rasheed",
+      quote:
+        "SD Studio understood the island context in a way we hadn't seen before. They designed with the wind, the tide, and the light — not against them.",
+    },
   },
   {
     id: 2,
     name: "Apex\nHouse",
+    slug: "apex-house",
     type: "Residence",
     location: "Sector 12, Noida (Near Adobe Regional Office)",
     status: "Ongoing",
@@ -184,10 +201,26 @@ export const PROJECTS = [
     image: "/images/projApex.jpeg",
     year: "2025",
     orientation: "portrait",
+    description:
+      "A compact urban residence that maximises vertical space through a series of split-level floors connected by a central light well. The facade employs angled aluminium fins that filter harsh western sun while creating a distinctive street presence. Every square metre is designed to work harder.",
+    scope: ["Architectural Planning", "Exterior Design", "Interior Design"],
+    gallery: ["/images/projApex.jpeg", "/images/proj1.jpg", "/images/proj3.jpg"],
+    highlights: [
+      "Split-level floor plates maximising spatial perception",
+      "Central light well bringing daylight to every floor",
+      "Angled aluminium fin facade for solar shading",
+      "Rooftop terrace with city views",
+    ],
+    client: {
+      name: "Rajesh & Priya Malhotra",
+      quote:
+        "We had a narrow plot and big aspirations. SD Studio turned our constraints into the defining character of the house.",
+    },
   },
   {
     id: 3,
     name: "The Grand\nFrame",
+    slug: "the-grand-frame",
     type: "Residence",
     location: "Sector 100, Noida",
     status: "Ongoing",
@@ -195,10 +228,26 @@ export const PROJECTS = [
     image: "/images/projGrand.jpeg",
     year: "2025",
     orientation: "portrait",
+    description:
+      "Named for its bold structural expression, The Grand Frame uses exposed concrete portal frames as both structure and ornament. The interiors flow between framed views of the garden, with floor-to-ceiling glazing dissolving the boundary between inside and out. A house that celebrates the honesty of its construction.",
+    scope: ["Architectural Planning", "Structural Expression", "Interior Design", "Landscape"],
+    gallery: ["/images/projGrand.jpeg", "/images/proj2.jpg", "/images/proj4.jpg"],
+    highlights: [
+      "Exposed concrete portal frame as design feature",
+      "Floor-to-ceiling glazing on garden elevation",
+      "Double-height living room with mezzanine library",
+      "Sunken courtyard connecting basement to ground level",
+    ],
+    client: {
+      name: "Vikram Sehgal",
+      quote:
+        "They showed us that structure doesn't need to be hidden. The frames became the identity of our home.",
+    },
   },
   {
     id: 4,
     name: "The Obsidian\nHouse",
+    slug: "the-obsidian-house",
     type: "Residence",
     location: "Sector Delta 3, Greater Noida",
     status: "Ongoing",
@@ -206,10 +255,27 @@ export const PROJECTS = [
     image: "/images/projObsidian.jpeg",
     year: "2026",
     orientation: "landscape",
+    description:
+      "A commanding residence clad in dark Kadappa stone and charcoal-finished metal, The Obsidian House makes a deliberate statement of restraint. The monochromatic exterior gives way to warm timber and textured plaster interiors, creating a journey from public formality to private warmth. The plan wraps around a central water court that brings reflected light deep into the house.",
+    scope: ["Exterior Design", "Interior Design", "Landscape", "Lighting Design"],
+    gallery: ["/images/projObsidian.jpeg", "/images/proj7.jpg", "/images/proj8.jpg"],
+    highlights: [
+      "Kadappa stone and charcoal metal cladding",
+      "Central water court with reflected light",
+      "Warm timber and textured plaster interiors",
+      "Automated lighting scenes for day-to-night transitions",
+      "Private rooftop garden with lap pool",
+    ],
+    client: {
+      name: "Amit & Neha Kapoor",
+      quote:
+        "SD Studio created a house that feels powerful from the street but incredibly warm once you step inside. That duality is exactly what we wanted.",
+    },
   },
   {
     id: 5,
     name: "Urban Oasis\nRooftop",
+    slug: "urban-oasis-rooftop",
     type: "Commercial (Terrace Garden)",
     location: "Salendpur Village, Begusarai, Bihar",
     status: "Ongoing",
@@ -217,10 +283,26 @@ export const PROJECTS = [
     image: "/images/projOasis.jpeg",
     year: "2025",
     orientation: "landscape",
+    description:
+      "Transforming a bare concrete rooftop into a layered garden retreat, Urban Oasis creates three distinct zones — a productive kitchen garden, a contemplative seating grove, and a social entertainment deck. The design uses lightweight planters, a drip irrigation system, and carefully selected species that thrive in Bihar's humid subtropical climate.",
+    scope: ["Landscape Design", "Terrace Garden", "Irrigation Planning", "Structural Assessment"],
+    gallery: ["/images/projOasis.jpeg", "/images/proj10.jpg", "/images/proj11.jpg"],
+    highlights: [
+      "Three-zone garden layout: productive, contemplative, social",
+      "Lightweight planter system for structural safety",
+      "Automated drip irrigation with rainwater harvesting",
+      "Native and climate-adapted plant species",
+    ],
+    client: {
+      name: "Dr. Sanjay Prasad",
+      quote:
+        "They turned our forgotten rooftop into the most-used space in the building. The garden practically takes care of itself.",
+    },
   },
   {
     id: 6,
     name: "The Nexus\nResidence",
+    slug: "the-nexus-residence",
     type: "Residence",
     location: "Sector 100, Noida",
     status: "Ongoing",
@@ -228,10 +310,26 @@ export const PROJECTS = [
     image: "/images/projNexus.jpeg",
     year: "2025",
     orientation: "portrait",
+    description:
+      "The Nexus Residence is conceived as a series of interlocking volumes, each housing a distinct family function — living, dining, private quarters, and a home studio. The junctions between volumes become the most interesting spaces: double-height voids, skylit staircases, and framed garden views that connect the separate worlds of the house.",
+    scope: ["Architectural Planning", "Exterior Design", "Interior Design"],
+    gallery: ["/images/projNexus.jpeg", "/images/proj9.jpg", "/images/proj12.jpg"],
+    highlights: [
+      "Interlocking volume composition",
+      "Skylit staircase connecting all levels",
+      "Dedicated home studio with acoustic treatment",
+      "Framed garden views at volume junctions",
+    ],
+    client: {
+      name: "Arjun & Kavita Reddy",
+      quote:
+        "We needed a house where everyone could have their own space but still feel connected. The interlocking plan does exactly that.",
+    },
   },
   {
     id: 7,
     name: "Arcadia\nResidence",
+    slug: "arcadia-residence",
     type: "Residence",
     location: "Sector 63, Noida",
     status: "Ongoing",
@@ -239,10 +337,26 @@ export const PROJECTS = [
     image: "/images/projArcadia.jpeg",
     year: "2025",
     orientation: "landscape",
+    description:
+      "Arcadia is a generous family home that places landscape at the heart of its plan. A mature neem tree anchors the central courtyard, around which all living spaces are arranged. The architecture steps back at upper levels to create deep terraces planted with jasmine and bougainvillea, blurring the line between garden and house.",
+    scope: ["Architectural Planning", "Exterior Design", "Landscape", "Interior Design"],
+    gallery: ["/images/projArcadia.jpeg", "/images/proj13.jpg", "/images/proj5.jpg"],
+    highlights: [
+      "Central courtyard built around an existing neem tree",
+      "Stepped-back upper floors with planted terraces",
+      "Natural stone flooring continuous from inside to outside",
+      "Passive cooling through courtyard stack ventilation",
+    ],
+    client: {
+      name: "The Sharma Family",
+      quote:
+        "Our children play in the courtyard, we have morning tea on the terrace surrounded by jasmine — SD Studio designed a home, not just a building.",
+    },
   },
   {
     id: 8,
     name: "Canopy\nHouse",
+    slug: "canopy-house",
     type: "Residence",
     location: "Sector 63, Noida",
     status: "Ongoing",
@@ -250,10 +364,26 @@ export const PROJECTS = [
     image: "/images/projCanopy.jpeg",
     year: "2025",
     orientation: "landscape",
+    description:
+      "Canopy House takes its name from its defining architectural gesture — a broad, floating concrete roof plane that extends well beyond the building envelope, creating deep shaded verandas on all sides. Beneath this protective canopy, the living spaces open generously to the garden through folding glass walls, making the house feel twice its size.",
+    scope: ["Architectural Planning", "Exterior Design", "Interior Design", "Landscape"],
+    gallery: ["/images/projCanopy.jpeg", "/images/proj6.jpg", "/images/proj7.jpg"],
+    highlights: [
+      "Cantilevered concrete roof extending 3 metres beyond walls",
+      "Folding glass walls dissolving indoor-outdoor boundary",
+      "Deep shaded verandas on all orientations",
+      "Integrated rainwater collection through roof drainage",
+    ],
+    client: {
+      name: "Deepak & Sunita Joshi",
+      quote:
+        "The overhanging roof changed everything. We live with our doors open eight months of the year now. It's a completely different way of life.",
+    },
   },
   {
     id: 9,
     name: "The Linear\nResidence",
+    slug: "the-linear-residence",
     type: "Residence",
     location: "Sector 51, Noida",
     status: "Ongoing",
@@ -261,10 +391,26 @@ export const PROJECTS = [
     image: "/images/projLinear.jpeg",
     year: "2026",
     orientation: "portrait",
+    description:
+      "A masterclass in small-footprint design, The Linear Residence arranges all functions along a single east-west axis, ensuring every room receives direct sunlight and natural ventilation. At just 93 square metres, the home feels spacious through careful use of built-in furniture, continuous flooring, and a private rear garden that extends the living room visually.",
+    scope: ["Architectural Planning", "Interior Design", "Space Optimisation"],
+    gallery: ["/images/projLinear.jpeg", "/images/proj1.jpg", "/images/proj9.jpg"],
+    highlights: [
+      "Single-axis plan for maximum light and ventilation",
+      "Built-in furniture reducing spatial clutter",
+      "Continuous flooring from entrance to rear garden",
+      "Compact yet complete home in under 100 sq mtr",
+    ],
+    client: {
+      name: "Sneha Chatterjee",
+      quote:
+        "Everyone told me 93 square metres would feel cramped. SD Studio proved them wrong — my home feels open, bright, and genuinely spacious.",
+    },
   },
   {
     id: 10,
     name: "The Guest\nHouse",
+    slug: "the-guest-house",
     type: "Commercial",
     location: "Sector 117, Noida",
     status: "Completed",
@@ -272,5 +418,21 @@ export const PROJECTS = [
     image: "/images/projGuest.jpeg",
     year: "2025",
     orientation: "portrait",
+    description:
+      "A boutique guest house designed to offer the warmth of a private home with the efficiency of a hospitality operation. Six individually themed suites are arranged around a shared lounge and breakfast courtyard, each with its own material identity — terrazzo, exposed brick, polished concrete, timber — creating a distinct sense of place in every room.",
+    scope: ["Architectural Planning", "Interior Design", "Branding & Signage", "Landscape"],
+    gallery: ["/images/projGuest.jpeg", "/images/proj2.jpg", "/images/proj8.jpg"],
+    highlights: [
+      "Six individually themed guest suites",
+      "Shared courtyard with breakfast seating",
+      "Distinct material identity per room",
+      "Integrated branding and wayfinding signage",
+      "First completed project in the SD Studio portfolio",
+    ],
+    client: {
+      name: "Manish & Ritu Agarwal",
+      quote:
+        "Our guests always comment on how each room feels like a different experience. SD Studio gave us a guest house with real character.",
+    },
   },
 ];

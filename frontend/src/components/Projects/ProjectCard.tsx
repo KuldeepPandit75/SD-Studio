@@ -3,9 +3,11 @@ import Image from "next/image";
 import { useThemeStore } from "@/src/Zustand_Store/ThemeStore";
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
+import Link from "next/link";
 
 export interface ProjectData {
   id: number;
+  slug: string;
   name: string;
   type: string;
   location: string;
@@ -83,8 +85,8 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
   // ─── GALLERY LAYOUT: Centered Frame ────────────────────
   if (showGalleryLayout) {
     return (
-      <div
-        className="absolute inset-0 w-full h-full overflow-hidden flex flex-col"
+      <Link href={`/project/${project.slug}`}
+        className="absolute inset-0 w-full h-full overflow-hidden flex flex-col block"
         style={{ backgroundColor: tertialColor }}
       >
         {/* Top: Project number + year */}
@@ -255,7 +257,7 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 
@@ -263,8 +265,8 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
   const isCenterPillar = mounted && isDesktop && !isLandscape;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full overflow-hidden"
+    <Link href={`/project/${project.slug}`}
+      className="absolute inset-0 w-full h-full overflow-hidden block"
       style={{ backgroundColor: tertialColor }}
     >
       {/* Hero Image */}
@@ -436,7 +438,7 @@ const ProjectCard = ({ project, isActive }: ProjectCardProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

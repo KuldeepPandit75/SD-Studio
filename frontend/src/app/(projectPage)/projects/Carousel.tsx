@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { PROJECTS } from "@/src/components/Services/data";
+import Link from "next/link";
 
 const CYCLE_HEIGHT = 3000;
 
@@ -59,7 +60,7 @@ export default function Carousel() {
                     className={`absolute left-1/2 -translate-x-1/2 ${zTranslateClass} ${yTranslateClass} ${xRotateClass}`}
                   >
                     {/* Standard img tag guarantees the div perfectly wraps the intrinsic image size */}
-                    <div className="relative group overflow-hidden cursor-pointer shadow-2xl rounded-[40px]">
+                    <Link href={`/project/${project.slug}`} className="relative group overflow-hidden cursor-pointer shadow-2xl rounded-[40px] block">
                       <img 
                         src={project.image} 
                         alt={project.name.replace('\n', ' ')} 
@@ -84,7 +85,7 @@ export default function Carousel() {
                           <div className="font-light">{project.status}</div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               );
