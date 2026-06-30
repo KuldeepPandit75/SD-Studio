@@ -99,7 +99,7 @@ export default function ProjectDetail({ slug }: ProjectDetailProps) {
       </section>
 
       {/* ── Gallery ────────────────────────────────────────────── */}
-      <section className="pd-gallery">
+      {/* <section className="pd-gallery">
         <p className="pd-gallery__label">Project Gallery</p>
         <div className="pd-gallery__grid">
           {project.gallery.map((img, i) => (
@@ -111,7 +111,7 @@ export default function ProjectDetail({ slug }: ProjectDetailProps) {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── Design Highlights ──────────────────────────────────── */}
       <section className="pd-highlights">

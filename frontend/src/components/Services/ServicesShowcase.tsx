@@ -5,16 +5,34 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { services } from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ServicesShowcase() {
+function ServicesShowcaseContent() {
   const { primaryColor, secondaryColor, tertialColor } = useThemeStore();
   const showcaseRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState<number>(0);
+  
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const initialTab = tabParam ? parseInt(tabParam, 10) : 0;
+  
+  const [activeTab, setActiveTab] = useState<number>(
+    !isNaN(initialTab) && initialTab >= 0 && initialTab < services.length ? initialTab : 0
+  );
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam) {
+      const tab = parseInt(tabParam, 10);
+      if (!isNaN(tab) && tab >= 0 && tab < services.length) {
+        setActiveTab(tab);
+      }
+    }
+  }, [searchParams]);
 
   // Animate content when tab changes
   useGSAP(
@@ -94,8 +112,12 @@ export default function ServicesShowcase() {
       <div className="showcase-tabs max-w-7xl mx-auto mb-10 sm:mb-16 relative">
         {/* Mobile horizontal scroll hint fade */}
         <div 
-          className="md:hidden absolute right-0 top-0 bottom-[17px] w-12 sm:w-20 pointer-events-none z-10" 
+          className="md:hidden absolute -right-5 top-0 bottom-[17px] w-12 sm:w-20 pointer-events-none z-10" 
           style={{ background: `linear-gradient(to right, transparent, ${secondaryColor})` }} 
+        />
+        <div 
+          className="md:hidden absolute -left-5 top-0 bottom-[17px] w-12 sm:w-20 pointer-events-none z-10" 
+          style={{ background: `linear-gradient(to left, transparent, ${secondaryColor})` }} 
         />
         <div
           className="flex overflow-x-auto hide-scrollbar gap-2 sm:gap-3 pb-4 border-b -mx-5 px-5 sm:mx-0 sm:px-0"
@@ -250,5 +272,13 @@ export default function ServicesShowcase() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ServicesShowcase() {
+  return (
+    <Suspense fallback={<div className="min-h-screen py-20" />}>
+      <ServicesShowcaseContent />
+    </Suspense>
   );
 }

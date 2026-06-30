@@ -3,18 +3,15 @@ import { useThemeStore } from "@/src/Zustand_Store/ThemeStore";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const OurServices = () => {
   const { primaryColor, secondaryColor } = useThemeStore();
+  const router=useRouter();
   const services = [
-    {
-      name: "Interior",
-      des: "Realistic interior renders that showcase lighting, materials, and atmosphere.",
-      img: "/images/interior.jpg",
-    },
     {
       name: "Architectural Plan",
       des: "Realistic exterior renders that highlight the architectural style, structure, and visual impact of your project.",
@@ -24,6 +21,11 @@ const OurServices = () => {
       name: "Exterior",
       des: "Stunning exterior rendering with precise detailing, realistic lighting, and exceptional visual appeal.",
       img: "/images/exterior.jpg",
+    },
+    {
+      name: "Interior",
+      des: "Realistic interior renders that showcase lighting, materials, and atmosphere.",
+      img: "/images/interior.jpg",
     },
   ];
 
@@ -82,6 +84,7 @@ const OurServices = () => {
             <div
               id={`card1`}
               key={idx}
+              onClick={()=>{router.push(`/services?tab=${idx}#services-showcase`)}}
               className="rounded-[19px] service-card hover:cursor-pointer"
               onMouseEnter={(e) => {
                 gsap.to(e.currentTarget, {

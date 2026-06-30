@@ -39,8 +39,9 @@ export default function Carousel() {
         <div className="absolute translate-z-[1000px] transform-3d">
           <div ref={carouselRef} className="transform-3d -translate-y-[300px]" style={{ transform: "rotateY(0deg)" }}>
             {PROJECTS.map((project, index) => {
-              // 10 projects, so 360 / 10 = 36 degrees apart
-              const angle = index * 36;
+              // 12 projects, so 360 / 12 = 30 degrees apart.
+              // Negative angle places them to the right, matching the scroll direction.
+              const angle = -index * 30;
               const isTop = index % 2 === 0;
               
               const yTranslateClass = isTop

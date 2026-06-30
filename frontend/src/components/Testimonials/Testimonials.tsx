@@ -12,7 +12,7 @@ const testimonials = [
   {
     quote: `"We've been doing business with Sandeep 3D for several years now. They are the best in their domain and I would recommend them to anyone who needs this kind of service."`,
     name: "Ram Jatan Pandit",
-    role: "Proprietor, Sandeep Constrution",
+    role: "Proprietor, Sandeep Construction",
   },
   {
     quote:
@@ -22,8 +22,8 @@ const testimonials = [
   },
   {
     quote: `"Working with Sandeep 3D has been a fantastic experience. Their attention to detail and realistic visualizations helped us present our projects with complete confidence. The team is professional, responsive, and always delivers high-quality work."`,
-    name: "Kuldeep Kumar",
-    role: "CEO, VaultMeet",
+    name: "Mayank Singhal",
+    role: "GST Officer",
   },
 ];
 
