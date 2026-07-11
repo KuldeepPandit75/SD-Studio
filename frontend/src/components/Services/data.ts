@@ -185,8 +185,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projNirvana.jpeg",
-      "/images/proj5.jpg",
-      "/images/proj6.jpg",
     ],
     highlights: [
       "Open-air pavilion structures with thatched roofing",
@@ -216,8 +214,6 @@ export const PROJECTS = [
     scope: ["Architectural Planning", "Exterior Design", "Interior Design"],
     gallery: [
       "/images/projApex.jpeg",
-      "/images/proj1.jpg",
-      "/images/proj3.jpg",
     ],
     highlights: [
       "Split-level floor plates maximising spatial perception",
@@ -241,7 +237,7 @@ export const PROJECTS = [
     size: "350 sq mtr",
     image: "/images/projJains.jpeg",
     year: "2026",
-    orientation: "portrait",
+    orientation: "landscape",
     description:
       "The Jain's Commercial is a mixed-use building designed to serve as a hub for commerce and community. With retail spaces on the ground floor and office spaces on the upper floors, the building is designed to be a landmark in the neighbourhood.",
     scope: [
@@ -252,8 +248,9 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projJains.jpeg",
-      "/images/proj10.jpg",
-      "/images/proj2.jpg",
+      "/images/skylineInt.png",
+      "/images/skylineInt2.png",
+      "/images/skylineInt3.png"
     ],
     highlights: [
       "Retail spaces on the ground floor for maximum footfall",
@@ -288,8 +285,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projGriha.jpeg",
-      "/images/proj13.jpg",
-      "/images/proj9.jpg",
     ],
     highlights: [
       "Central courtyard designed as the heart of the home",
@@ -324,8 +319,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projGrand.jpeg",
-      "/images/proj2.jpg",
-      "/images/proj4.jpg",
     ],
     highlights: [
       "Exposed concrete portal frame as design feature",
@@ -360,8 +353,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projObsidian.jpeg",
-      "/images/proj7.jpg",
-      "/images/proj8.jpg",
     ],
     highlights: [
       "Kadappa stone and charcoal metal cladding",
@@ -397,8 +388,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projOasis.jpeg",
-      "/images/proj10.jpg",
-      "/images/proj11.jpg",
     ],
     highlights: [
       "Three-zone garden layout: productive, contemplative, social",
@@ -428,8 +417,6 @@ export const PROJECTS = [
     scope: ["Architectural Planning", "Exterior Design", "Interior Design"],
     gallery: [
       "/images/projNexus.jpeg",
-      "/images/proj9.jpg",
-      "/images/proj12.jpg",
     ],
     highlights: [
       "Interlocking volume composition",
@@ -464,8 +451,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projArcadia.jpeg",
-      "/images/proj13.jpg",
-      "/images/proj5.jpg",
     ],
     highlights: [
       "Central courtyard built around an existing neem tree",
@@ -500,8 +485,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projCanopy.jpeg",
-      "/images/proj6.jpg",
-      "/images/proj7.jpg",
     ],
     highlights: [
       "Cantilevered concrete roof extending 3 metres beyond walls",
@@ -531,8 +514,6 @@ export const PROJECTS = [
     scope: ["Architectural Planning", "Interior Design", "Space Optimisation"],
     gallery: [
       "/images/projLinear.jpeg",
-      "/images/proj1.jpg",
-      "/images/proj9.jpg",
     ],
     highlights: [
       "Single-axis plan for maximum light and ventilation",
@@ -567,8 +548,6 @@ export const PROJECTS = [
     ],
     gallery: [
       "/images/projGuest.jpeg",
-      "/images/proj2.jpg",
-      "/images/proj8.jpg",
     ],
     highlights: [
       "Six individually themed guest suites",

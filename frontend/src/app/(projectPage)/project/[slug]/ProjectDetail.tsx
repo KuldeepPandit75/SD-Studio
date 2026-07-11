@@ -99,10 +99,13 @@ export default function ProjectDetail({ slug }: ProjectDetailProps) {
       </section>
 
       {/* ── Gallery ────────────────────────────────────────────── */}
-      {/* <section className="pd-gallery">
+      <section className="pd-gallery">
         <p className="pd-gallery__label">Project Gallery</p>
         <div className="pd-gallery__grid">
-          {project.gallery.map((img, i) => (
+          {(project.slug === "jains-commercial"
+            ? project.gallery.slice(0, -3)
+            : project.gallery
+          ).map((img, i) => (
             <div key={i} className="pd-gallery__item">
               <img
                 src={img}
@@ -111,7 +114,30 @@ export default function ProjectDetail({ slug }: ProjectDetailProps) {
             </div>
           ))}
         </div>
-      </section> */}
+      </section>
+
+      {project.slug === "jains-commercial" && project.gallery.length >= 3 && (
+        <section className="pd-gallery" style={{ borderTop: "none", paddingTop: 0 }}>
+          <h2 style={{ marginBottom: "40px", display: "flex", alignItems: "baseline", gap: "12px", flexWrap: "wrap" }}>
+            <span style={{ fontFamily: '"Avant", sans-serif', fontSize: "clamp(28px, 4vw, 40px)", fontWeight: "bold", color: "var(--pd-fg)" }}>
+              Rooftop Restaurant
+            </span>
+            <span style={{ fontFamily: '"Avenir", sans-serif', fontSize: "20px", fontWeight: 300, color: "var(--pd-muted)" }}>
+              (Skyline) - <b style={{ fontWeight: "bold" }}>Jains Office</b>
+            </span>
+          </h2>
+          <div className="pd-gallery__grid">
+            {project.gallery.slice(-3).map((img, i) => (
+              <div key={i} className="pd-gallery__item">
+                <img
+                  src={img}
+                  alt={`${projectName} Rooftop — View ${i + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Design Highlights ──────────────────────────────────── */}
       <section className="pd-highlights">
