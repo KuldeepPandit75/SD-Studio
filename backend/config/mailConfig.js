@@ -10,7 +10,7 @@ export const sendMail = async (formData) => {
     const { firstName, lastName, email, phone, projectType, message } =
       formData;
 
-    const textContent = `New Project Inquiry - SD Studio
+    const textContent = `New Project Inquiry - Sanova Architects
 
 Client Information:
 Name: ${firstName} ${lastName}
@@ -21,7 +21,7 @@ Project Type: ${projectType}
 Project Details:
 ${message}
 
-Automated message from SD Studio Website`;
+Automated message from Sanova Architects Website`;
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -41,7 +41,7 @@ Automated message from SD Studio Website`;
                   <!-- Header Section -->
                   <tr>
                     <td style="padding: 40px 40px 20px 40px; text-align: center; border-bottom: 1px solid #e5e1d8;">
-                      <h1 style="color: #082c2b; margin: 0; font-size: 28px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">SD Studio</h1>
+                      <h1 style="color: #082c2b; margin: 0; font-size: 28px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Sanova Architects</h1>
                       <p style="color: #555555; margin: 10px 0 0 0; font-size: 14px; letter-spacing: 1px;">ARCHITECTURE & DESIGN</p>
                     </td>
                   </tr>
@@ -93,7 +93,7 @@ Automated message from SD Studio Website`;
                     <td style="padding: 30px 40px; background-color: #efece5; text-align: center;">
                       <p style="color: #777777; margin: 0 0 10px 0; font-size: 13px;">&copy; 2026 Sandeep3DStudio. All rights reserved.</p>
                       <p style="color: #999999; margin: 0; font-size: 11px; line-height: 1.5;">
-                        This is an automated message generated from the SD Studio website contact form.<br>
+                        This is an automated message generated from the Sanova Architects website contact form.<br>
                         Please do not reply directly to this email address.
                       </p>
                     </td>
@@ -109,7 +109,7 @@ Automated message from SD Studio Website`;
 
     const userTextContent = `Hello ${firstName},
 
-Thank you for contacting SD Studio. We have received your inquiry regarding your ${projectType} project.
+Thank you for contacting Sanova Architects. We have received your inquiry regarding your ${projectType} project.
 
 Our team will review your message and get back to you shortly.
 
@@ -117,7 +117,7 @@ Your Message Summary:
 ${message}
 
 Best regards,
-SD Studio
+Sanova Architects
 ARCHITECTURE & DESIGN`;
 
     const userHtmlContent = `
@@ -126,7 +126,7 @@ ARCHITECTURE & DESIGN`;
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Inquiry Received - SD Studio</title>
+          <title>Inquiry Received - Sanova Architects</title>
         </head>
         <body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #082c2b; -webkit-font-smoothing: antialiased;">
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #082c2b; padding: 40px 20px;">
@@ -138,7 +138,7 @@ ARCHITECTURE & DESIGN`;
                   <!-- Header Section -->
                   <tr>
                     <td style="padding: 40px 40px 20px 40px; text-align: center; border-bottom: 1px solid #e5e1d8;">
-                      <h1 style="color: #082c2b; margin: 0; font-size: 28px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">SD Studio</h1>
+                      <h1 style="color: #082c2b; margin: 0; font-size: 28px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;">Sanova Architects</h1>
                       <p style="color: #555555; margin: 10px 0 0 0; font-size: 14px; letter-spacing: 1px;">ARCHITECTURE & DESIGN</p>
                     </td>
                   </tr>
@@ -162,7 +162,7 @@ ARCHITECTURE & DESIGN`;
                       
                       <p style="color: #444444; font-size: 16px; line-height: 1.6; margin: 30px 0 0 0;">
                         Best regards,<br>
-                        <strong>The SD Studio Team</strong>
+                        <strong>The Sanova Architects Team</strong>
                       </p>
                     </td>
                   </tr>
@@ -188,16 +188,16 @@ ARCHITECTURE & DESIGN`;
 
     const [adminResponse, userResponse] = await Promise.all([
       resend.emails.send({
-        from: "SD Studio Website <noreply@sandeep3d.studio>",
+        from: "Sanova Architects Website <noreply@sandeep3d.studio>",
         to: [process.env.OWNER_EMAIL,process.env.OWNER2_EMAIL],
-        subject: `New Project Inquiry: ${projectType} - SD Studio`,
+        subject: `New Project Inquiry: ${projectType} - Sanova Architects`,
         text: textContent,
         html: htmlContent,
       }),
       resend.emails.send({
-        from: "SD Studio Website <noreply@sandeep3d.studio>",
+        from: "Sanova Architects Website <noreply@sandeep3d.studio>",
         to: [email],
-        subject: "We've Received Your Inquiry - SD Studio",
+        subject: "We've Received Your Inquiry - Sanova Architects",
         text: userTextContent,
         html: userHtmlContent,
       }),

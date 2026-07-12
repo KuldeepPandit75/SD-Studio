@@ -267,13 +267,13 @@ const ProjectsShowcase = () => {
         </span>
       </Link>
 
-      {/* SD Studio wordmark */}
+      {/* Sanova Architects wordmark */}
       <div className="fixed top-6 right-5 z-50">
         <span
           className="font-avant font-bold text-sm tracking-[0.1em] opacity-40"
           style={{ color: secondaryColor }}
         >
-          SD Studio
+          Sanova Architects
         </span>
       </div>
 

@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
         <div className="why-header text-center mb-14 sm:mb-20">
           <p className="font-avant text-xs sm:text-sm tracking-[0.25em] uppercase mb-3"
             style={{ color: primaryColor }}>
-            The SD Studio Promise
+            The Sanova Architects Promise
           </p>
           <h2 className="font-avant text-3xl sm:text-4xl md:text-5xl leading-tight"
             style={{ color: tertialColor }}>

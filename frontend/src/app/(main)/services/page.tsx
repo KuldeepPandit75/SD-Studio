@@ -10,7 +10,7 @@ import FaqSection from "@/src/components/Services/FaqSection";
 import CtaSection from "@/src/components/Services/CtaSection";
 
 export const metadata: Metadata = {
-  title: "Services | SD Studio",
+  title: "Services | Sanova Architects",
   description:
     "Explore our professional 3D visualization, architectural planning, interior design, and landscape design services. We bring your ideas to life with photorealistic renders.",
 };

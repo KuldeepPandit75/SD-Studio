@@ -2,9 +2,9 @@ import Carousel from "./Carousel";
 import ProjectsOverlay from "./ProjectsOverlay";
 
 export const metadata = {
-  title: "Projects | SD Studio",
+  title: "Projects | Sanova Architects",
   description:
-    "Explore our portfolio of architectural projects — villas, residences, commercial spaces, interiors, and landscapes brought to life by SD Studio.",
+    "Explore our portfolio of architectural projects — villas, residences, commercial spaces, interiors, and landscapes brought to life by Sanova Architects.",
 };
 
 export default function ProjectPage() {

@@ -107,58 +107,26 @@ const Navbar = () => {
         <Link
           href="/"
           id="logo"
-          className={`flex items-center gap-[10px] sm:gap-[40px] select-none relative ${isServicesPage ? "" : "mix-blend-difference"}`}
+          className={`flex items-center gap-[10px] sm:gap-[20px] select-none relative ${isServicesPage ? "" : "mix-blend-difference"} z-50`}
         >
-          <Image
-            src={isServicesPage ? "/icons/logoG.svg" : "/icons/logoB.svg"}
-            id="logoImg"
-            alt="Logo"
-            className="opacity-0 w-[50px] sm:w-[60px]"
-            width={60}
-            height={60}
-          />
-          <span
+          <div
             id="logoText"
-            className="relative bottom-1 overflow-hidden w-[100px]"
+            className="flex flex-row items-baseline gap-2 sm:flex-col sm:items-start sm:gap-0 sm:mt-1"
             style={{ color: isServicesPage ? secondaryColor : "inherit" }}
           >
             <p
-              className="font-black text-3xl sm:text-4xl py-1 opacity-0"
+              className="font-black text-2xl sm:text-4xl opacity-0 uppercase tracking-wide leading-none"
               id="sd"
             >
-              SD
+              Sanova
             </p>
             <p
               id="studio"
-              className="font-beach opacity-0 text-xl sm:text-2xl absolute top-[20px] left-[40px]"
+              className="opacity-0 text-sm sm:text-xl uppercase tracking-[0.3em] font-light sm:mt-1"
               style={{ color: primaryColor }}
             >
-              Studio
+              Architects
             </p>
-          </span>
-          <div className="absolute hidden sm:block" id="lines">
-            <div className="relative opacity-70 flex flex-col gap-1">
-              <hr
-                id="line1"
-                className="absolute -left-[3vw] -top-[35px] w-[200px] opacity-0"
-                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
-              />
-              <hr
-                id="line2"
-                className="absolute -left-[3vw] -bottom-[35px] w-[160px] opacity-0"
-                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
-              />
-              <hr
-                id="line3"
-                className="absolute -left-[50px] rotate-90 w-[250px] opacity-0"
-                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
-              />
-              <hr
-                id="line4"
-                className="absolute -left-[340px] rotate-90 w-[650px] opacity-0"
-                style={{ borderColor: isServicesPage ? primaryColor : "black" }}
-              />
-            </div>
           </div>
         </Link>
         <div

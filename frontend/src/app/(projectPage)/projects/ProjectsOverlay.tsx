@@ -222,7 +222,7 @@ export default function ProjectsOverlay() {
       <div className="projects-overlay">
         {/* ── Header (top-left) ─────────────────────────────────── */}
         <div className="proj-header">
-          <Link href="/" className="proj-header__label hover:scale-105 transition duration-[0.1s] cursor-pointer">SD Studio — Portfolio</Link>
+          <Link href="/" className="proj-header__label hover:scale-105 transition duration-[0.1s] cursor-pointer">Sanova Architects — Portfolio</Link>
           <div className="proj-header__rule" />
           <h1 className="proj-header__title">Selected Works</h1>
           <p className="proj-header__statement">

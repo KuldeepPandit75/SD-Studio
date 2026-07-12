@@ -13,14 +13,14 @@ const OurServices = () => {
   const router=useRouter();
   const services = [
     {
-      name: "Architectural Plan",
-      des: "Realistic exterior renders that highlight the architectural style, structure, and visual impact of your project.",
-      img: "/images/arch.jpg",
-    },
-    {
       name: "Exterior",
       des: "Stunning exterior rendering with precise detailing, realistic lighting, and exceptional visual appeal.",
       img: "/images/exterior.jpg",
+    },
+    {
+      name: "Architectural Plan",
+      des: "Realistic exterior renders that highlight the architectural style, structure, and visual impact of your project.",
+      img: "/images/arch.jpg",
     },
     {
       name: "Interior",

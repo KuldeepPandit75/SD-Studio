@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SD Studio",
+  title: "Sanova Architects",
   description:
     "Our layout designs focus on efficient space planning and structural clarity. We create detailed architectural layouts that help visualize room placement, circulation, and functional design before construction begins. With accurate planning and modern design principles, we ensure every space is optimized for both aesthetics and usability.",
   keywords: [
-    "SD Studio",
+    "Sanova Architects",
     "Architectural layouts",
     "residential layout design",
     "home layout design",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "SD Studio",
+      name: "Sanova Architects",
       url: "https://sandeep3d.studio",
     },
   ],

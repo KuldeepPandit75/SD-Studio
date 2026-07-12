@@ -1,30 +1,5 @@
 export const services = [
-  {
-    id: "architectural",
-    name: "Architectural Planning",
-    tagline: "Blueprint Your Vision with Precision",
-    shortDesc:
-      "Detailed architectural layouts for efficient space planning and structural clarity.",
-    description:
-      "Great buildings begin with great plans. Our architectural planning service doesn't just draw lines on paper — we engineer experiences. Every corridor has purpose, every room has optimal proportions, and every structural element is placed with both beauty and building science in mind. We translate your ideas into technically accurate, aesthetically refined blueprints ready for construction.",
-    deliverables: [
-      "Detailed floor plans with dimensions",
-      "Site layout & orientation analysis",
-      "Structural column & beam layout",
-      "Plumbing & electrical pathway planning",
-      "Vastu/Feng Shui compliance (on request)",
-      "AutoCAD & PDF deliverables",
-    ],
-    idealFor: "Architects, Builders, Contractors, Homeowners",
-    turnaround: "7-10 working days",
-    img: "/images/arch.jpg",
-    galleryImgs: [
-      "/images/proj2.jpg",
-      "/images/proj4.jpg",
-      "/images/proj8.jpg",
-    ],
-    accent: "#8B7355",
-  },
+  
 
   {
     id: "exterior",
@@ -51,6 +26,32 @@ export const services = [
       "/images/projGrand.jpeg",
     ],
     accent: "#5B7B8A",
+  },
+  {
+    id: "architectural",
+    name: "Architectural Planning",
+    tagline: "Blueprint Your Vision with Precision",
+    shortDesc:
+      "Detailed architectural layouts for efficient space planning and structural clarity.",
+    description:
+      "Great buildings begin with great plans. Our architectural planning service doesn't just draw lines on paper — we engineer experiences. Every corridor has purpose, every room has optimal proportions, and every structural element is placed with both beauty and building science in mind. We translate your ideas into technically accurate, aesthetically refined blueprints ready for construction.",
+    deliverables: [
+      "Detailed floor plans with dimensions",
+      "Site layout & orientation analysis",
+      "Structural column & beam layout",
+      "Plumbing & electrical pathway planning",
+      "Vastu/Feng Shui compliance (on request)",
+      "AutoCAD & PDF deliverables",
+    ],
+    idealFor: "Architects, Builders, Contractors, Homeowners",
+    turnaround: "7-10 working days",
+    img: "/images/arch.jpg",
+    galleryImgs: [
+      "/images/proj2.jpg",
+      "/images/proj4.jpg",
+      "/images/proj8.jpg",
+    ],
+    accent: "#8B7355",
   },
   {
     id: "interior",
@@ -195,7 +196,7 @@ export const PROJECTS = [
     client: {
       name: "Abdulla Rasheed",
       quote:
-        "SD Studio understood the island context in a way we hadn't seen before. They designed with the wind, the tide, and the light — not against them.",
+        "Sanova Architects understood the island context in a way we hadn't seen before. They designed with the wind, the tide, and the light — not against them.",
     },
   },
   {
@@ -224,7 +225,7 @@ export const PROJECTS = [
     client: {
       name: "Rajesh & Priya Malhotra",
       quote:
-        "We had a narrow plot and big aspirations. SD Studio turned our constraints into the defining character of the house.",
+        "We had a narrow plot and big aspirations. Sanova Architects turned our constraints into the defining character of the house.",
     },
   },
   {
@@ -261,7 +262,7 @@ export const PROJECTS = [
     client: {
       name: "Jain Developers",
       quote:
-        "SD Studio delivered a design that perfectly balances retail visibility with premium office functionality.",
+        "Sanova Architects delivered a design that perfectly balances retail visibility with premium office functionality.",
     },
   },
   {
@@ -364,7 +365,7 @@ export const PROJECTS = [
     client: {
       name: "Amit & Neha Kapoor",
       quote:
-        "SD Studio created a house that feels powerful from the street but incredibly warm once you step inside. That duality is exactly what we wanted.",
+        "Sanova Architects created a house that feels powerful from the street but incredibly warm once you step inside. That duality is exactly what we wanted.",
     },
   },
   {
@@ -461,7 +462,7 @@ export const PROJECTS = [
     client: {
       name: "The Sharma Family",
       quote:
-        "Our children play in the courtyard, we have morning tea on the terrace surrounded by jasmine — SD Studio designed a home, not just a building.",
+        "Our children play in the courtyard, we have morning tea on the terrace surrounded by jasmine — Sanova Architects designed a home, not just a building.",
     },
   },
   {
@@ -524,7 +525,7 @@ export const PROJECTS = [
     client: {
       name: "Sneha Chatterjee",
       quote:
-        "Everyone told me 93 square metres would feel cramped. SD Studio proved them wrong — my home feels open, bright, and genuinely spacious.",
+        "Everyone told me 93 square metres would feel cramped. Sanova Architects proved them wrong — my home feels open, bright, and genuinely spacious.",
     },
   },
   {
@@ -554,12 +555,12 @@ export const PROJECTS = [
       "Shared courtyard with breakfast seating",
       "Distinct material identity per room",
       "Integrated branding and wayfinding signage",
-      "First completed project in the SD Studio portfolio",
+      "First completed project in the Sanova Architects portfolio",
     ],
     client: {
       name: "Manish & Ritu Agarwal",
       quote:
-        "Our guests always comment on how each room feels like a different experience. SD Studio gave us a guest house with real character.",
+        "Our guests always comment on how each room feels like a different experience. Sanova Architects gave us a guest house with real character.",
     },
   },
 ];

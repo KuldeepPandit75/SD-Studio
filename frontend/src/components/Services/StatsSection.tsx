@@ -15,7 +15,7 @@ export default function StatsSection() {
   const [statsVisible, setStatsVisible] = useState(false);
 
   // Animated counters
-  const projectCount = useCounter(150, 2000, statsVisible);
+  const projectCount = useCounter(50, 2000, statsVisible);
   const clientCount = useCounter(50, 2000, statsVisible);
   const yearCount = useCounter(5, 1500, statsVisible);
 
@@ -57,7 +57,7 @@ export default function StatsSection() {
           {[
             { value: `${projectCount}+`, label: "Projects Delivered", suffix: "and counting" },
             { value: `${clientCount}+`, label: "Happy Clients", suffix: "across India" },
-            { value: `${yearCount}+`, label: "Years of Experience", suffix: "in the industry" },
+            { value: `${yearCount}+`, label: "Years of Experience", suffix: "" },
             { value: "100%", label: "Client Satisfaction", suffix: "our commitment" },
           ].map((stat, idx) => (
             <div

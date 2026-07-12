@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: PageProps) {
   const project = PROJECTS.find((p) => p.slug === slug);
 
   if (!project) {
-    return { title: "Project Not Found | SD Studio" };
+    return { title: "Project Not Found | Sanova Architects" };
   }
 
   const name = project.name.replace("\\n", " ");
 
   return {
-    title: `${name} | SD Studio`,
+    title: `${name} | Sanova Architects`,
     description: project.description,
   };
 }

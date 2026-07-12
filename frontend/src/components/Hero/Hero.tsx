@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const Hero = () => {
-  const { primaryColor, tertialColor } = useThemeStore();
+  const { primaryColor,secondaryColor, tertialColor } = useThemeStore();
 
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const videosRef = useRef<(HTMLVideoElement | null)[]>([]);
@@ -180,7 +180,7 @@ const Hero = () => {
       });
 
       tl.to("#hero-text", {
-        bottom: "20vh",
+        bottom: "18vh",
         duration: 1,
         ease: "power2.out",
       });
@@ -348,16 +348,30 @@ const Hero = () => {
         ></div>
         <div
           id="hero-text"
-          className="sm:h-[calc(100vh)] h-[calc(100vh)] flex flex-col justify-center items-center gap-5 relative bottom-[4vh] z-10 pointer-events-none"
+          className="sm:h-[calc(100vh)] h-[calc(100vh)] flex flex-col justify-center items-center gap-2 relative bottom-[4vh] z-10 pointer-events-none"
         >
-          <h1 className="text-center font-avant font-bold text-[clamp(14px,4vh,48px)] sm:text-[clamp(34px,4vw,42px)] sm:w-[60vw] w-[80vw]">
-            Bringing Architecture to Life with Stunning Visuals.
-          </h1>
+          <div className="flex flex-col items-center">
+            <h1 className="text-center font-avant font-black uppercase text-[clamp(40px,7vw,100px)] leading-16 tracking-tighter">
+              Sanova
+            </h1>
+            <h2 
+              className="text-center font-avant font-light uppercase text-[clamp(28px,5vw,70px)] tracking-[0.1em] sm:tracking-[0.2em]"
+              style={{ color: primaryColor }}
+            >
+              Architects
+            </h2>
+          </div>
+          
+          <div 
+            className="w-[80px] h-[2px] mt-4 mb-3 opacity-60" 
+            style={{ backgroundColor: primaryColor }}
+          ></div>
+
           <p
-            className="text-center font-beach text-[clamp(12px,5vw,32px)] sm:text-[clamp(20px,2vw,36px)] w-[70vw] sm:w-[55vw]"
-            style={{ color: primaryColor }}
+            className="text-center font-beach text-[clamp(12px,5vw,32px)] sm:text-[clamp(20px,2vw,36px)] w-[70vw] sm:w-[55vw] tracking-widest"
+            style={{ color: tertialColor }}
           >
-            Building your dream home? We help homeowners visualize and design every detail before construction begins.
+            Bringing Architecture to Life with Stunning Visuals.
           </p>
         </div>
         <div
