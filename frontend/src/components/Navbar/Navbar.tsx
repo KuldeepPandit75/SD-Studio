@@ -109,25 +109,7 @@ const Navbar = () => {
           id="logo"
           className={`flex items-center gap-[10px] sm:gap-[20px] select-none relative ${isServicesPage ? "" : "mix-blend-difference"} z-50`}
         >
-          <div
-            id="logoText"
-            className="flex flex-row items-baseline gap-2 sm:flex-col sm:items-start sm:gap-0 sm:mt-1"
-            style={{ color: isServicesPage ? secondaryColor : "inherit" }}
-          >
-            <p
-              className="font-black text-2xl sm:text-4xl opacity-0 uppercase tracking-wide leading-none"
-              id="sd"
-            >
-              Sanova
-            </p>
-            <p
-              id="studio"
-              className="opacity-0 text-sm sm:text-xl uppercase tracking-[0.3em] font-light sm:mt-1"
-              style={{ color: primaryColor }}
-            >
-              Architects
-            </p>
-          </div>
+          <Image alt="logo" width={60} height={60} className="select-none border-b-4" src={"/icons/logoB.svg"} style={{borderColor: primaryColor}}/>
         </Link>
         <div
           id="nav-links"

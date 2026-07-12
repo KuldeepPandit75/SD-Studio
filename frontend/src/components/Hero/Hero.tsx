@@ -393,7 +393,8 @@ const Hero = () => {
                 ref={(el) => {
                   videosRef.current[idx] = el;
                 }}
-                src={src}
+                src={`${src}#t=0.001`}
+                preload="metadata"
                 className={`object-cover w-full h-full ${src == "/videos/landscape.mp4" ? "scale-130" : "scale-110"}`}
                 muted
                 playsInline
