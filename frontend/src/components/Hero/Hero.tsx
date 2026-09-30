@@ -4,440 +4,336 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+gsap.registerPlugin(ScrollTrigger);
+
+const RENDER = {
+  src: "/images/exterior1.jpeg",
+  caption: "The Griha",
+  detail: "Residence",
+};
+
+// First three match the service names in Services/data.ts.
+const DISCIPLINES = [
+  "Architectural Planning",
+  "Exterior & Elevation",
+  "Interior Design",
+  "Landscape",
+  "3D Visualization",
+];
+
+/*
+ * Line-drawing filter:
+ * grayscale → soften noise → edge detect → invert into dark lines on white →
+ * tint lines to the brand ink (#03191E) and paper to the brand cream (#FFF3E9).
+ * LINE_STRENGTH controls how dark/dense the pencil lines are.
+ */
+const LINE_STRENGTH = 4.5;
+const SketchFilter = () => (
+  <svg aria-hidden="true" width="0" height="0" className="absolute">
+    <filter id="hero-sketch" colorInterpolationFilters="sRGB" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix type="saturate" values="0" />
+      <feGaussianBlur stdDeviation="0.7" />
+      <feConvolveMatrix
+        order="3"
+        kernelMatrix="-1 -1 -1  -1 8 -1  -1 -1 -1"
+        preserveAlpha="true"
+        edgeMode="duplicate"
+      />
+      <feComponentTransfer>
+        <feFuncR type="linear" slope={-LINE_STRENGTH} intercept="1" />
+        <feFuncG type="linear" slope={-LINE_STRENGTH} intercept="1" />
+        <feFuncB type="linear" slope={-LINE_STRENGTH} intercept="1" />
+      </feComponentTransfer>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.012 1" />
+        <feFuncG type="table" tableValues="0.098 0.953" />
+        <feFuncB type="table" tableValues="0.118 0.914" />
+      </feComponentTransfer>
+    </filter>
+  </svg>
+);
+
 const Hero = () => {
-  const { primaryColor,secondaryColor, tertialColor } = useThemeStore();
+  const { primaryColor, secondaryColor, tertialColor } = useThemeStore();
 
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const videosRef = useRef<(HTMLVideoElement | null)[]>([]);
-  const [positions, setPositions] = useState([0, 1, 2]);
-  const [isInitialAnimationDone, setIsInitialAnimationDone] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [interacted, setInteracted] = useState(false);
 
-  const SLOTS = [
-    { x: -350, rotateZ: -20, scale: 0.6, zIndex: 10, opacity: 0.9 }, // 0: Left
-    { x: 0, rotateZ: 0, scale: 1, zIndex: 20, opacity: 1 }, // 1: Center
-    { x: 350, rotateZ: 10, scale: 0.6, zIndex: 10, opacity: 0.9 }, // 2: Right
-  ];
-
-  const videosList = [
-    "/videos/interior2.mp4",
-    "/videos/interior1.mp4",
-    "/videos/landscape.mp4",
-  ];
-
-  const handleVideoEnded = (index: number) => {
-    if (positions[index] === 1) {
-      setPositions((prev) => prev.map((slot) => (slot + 1) % 3));
-    }
-  };
-
-  const handleTimeUpdate = (index: number) => {
-    if (positions[index] === 1 && videosRef.current[index]) {
-      const video = videosRef.current[index];
-      const currentProgress = (video.currentTime / video.duration) * 100;
-      setProgress(currentProgress || 0);
-    }
-  };
+  // Lens state lives in refs so the rAF loop never re-renders React.
+  const lens = useRef({
+    x: 0, y: 0, tx: 0, ty: 0, // current + target position (px, stage space)
+    w: 0, h: 0,               // stage size
+    scale: 0,                 // intro pop (0 → 1)
+    scroll: 0,                // 0 → 1 as the hero scrolls away
+    lastMove: -Infinity,
+  });
 
   useEffect(() => {
-    if (!isInitialAnimationDone) {
-      videosRef.current.forEach((v) => v?.pause());
-      return;
-    }
-    videosRef.current.forEach((video, index) => {
-      if (!video) return;
-      if (positions[index] === 1) {
-        video.currentTime = 0;
-        video.play().catch((e) => console.log("Autoplay prevented:", e));
-      } else {
-        video.pause();
+    const stage = stageRef.current;
+    if (!stage) return;
+    const s = lens.current;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const measure = () => {
+      s.w = stage.clientWidth;
+      s.h = stage.clientHeight;
+      if (!s.x) {
+        s.x = s.tx = s.w * 0.55;
+        s.y = s.ty = s.h * 0.45;
       }
-    });
-  }, [positions, isInitialAnimationDone]);
-
-  const createStar = () => {
-    const star = document.createElement("div");
-    star.className = "star absolute w-[3px] h-[3px] rounded-full opacity-80";
-
-    const space = document.getElementById("starBg");
-    const spaceHeight = space?.clientHeight || 0;
-    const spaceWidth = space?.clientWidth || 0;
-
-    const initialX = Math.floor(Math.random() * spaceWidth) + 1;
-    const initialY = Math.floor(Math.random() * spaceHeight) + 1;
-
-    star.style.top = `${initialY}px`;
-    star.style.left = `${initialX}px`;
-
-    star.style.backgroundColor = primaryColor;
-
-    const dir = Math.floor(Math.random() * 4) + 1;
-    let animationFrameId: number;
-    let lastTime = performance.now();
-    const speed = 0.02; // pixels per millisecond
-
-    const animate = (currentTime: number) => {
-      const deltaTime = currentTime - lastTime;
-      lastTime = currentTime;
-
-      const distance = speed * deltaTime;
-
-      let currentTop = Number(star.style.top.slice(0, -2));
-      let currentLeft = Number(star.style.left.slice(0, -2));
-
-      if (dir === 1) {
-        currentTop += distance;
-        currentLeft += distance;
-      } else if (dir === 2) {
-        currentTop -= distance;
-        currentLeft += distance;
-      } else if (dir === 3) {
-        currentTop += distance;
-        currentLeft -= distance;
-      } else {
-        currentTop -= distance;
-        currentLeft -= distance;
-      }
-
-      // Wrap around if out of bounds to simulate new stars appearing
-      if (currentTop > spaceHeight) currentTop = 0;
-      else if (currentTop < 0) currentTop = spaceHeight;
-
-      if (currentLeft > spaceWidth) currentLeft = 0;
-      else if (currentLeft < 0) currentLeft = spaceWidth;
-
-      star.style.top = `${currentTop}px`;
-      star.style.left = `${currentLeft}px`;
-
-      animationFrameId = requestAnimationFrame(animate);
     };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(stage);
 
-    space?.append(star);
-    animationFrameId = requestAnimationFrame(animate);
+    let frame: number;
+    const tick = (now: number) => {
+      const idle = now - s.lastMove > 2200;
+      if (idle && !reduced) {
+        const t = now / 1000;
+        s.tx = s.w * (0.52 + 0.2 * Math.sin(t * 0.33));
+        s.ty = s.h * (0.46 + 0.18 * Math.sin(t * 0.47 + 1.2));
+      }
+      const ease = idle ? 0.03 : 0.12;
+      s.x += (s.tx - s.x) * ease;
+      s.y += (s.ty - s.y) * ease;
+
+      const base = Math.min(Math.max(Math.min(s.w, s.h) * 0.2, 80), 180);
+      const full = Math.hypot(s.w, s.h);
+      const grow = s.scroll * s.scroll * (3 - 2 * s.scroll); // smoothstep
+      const r = base * s.scale + (full - base * s.scale) * grow;
+
+      stage.style.setProperty("--lx", `${s.x.toFixed(1)}px`);
+      stage.style.setProperty("--ly", `${s.y.toFixed(1)}px`);
+      stage.style.setProperty("--lr", `${r.toFixed(1)}px`);
+      stage.style.setProperty("--ring", `${Math.max(0, 1 - grow * 3)}`);
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      star.remove();
-    };
-  };
-
-  useEffect(() => {
-    const cleanupFunctions: (() => void)[] = [];
-
-    // Create initial stars
-    for (let i = 0; i <= 30; i++) {
-      const cleanup = createStar();
-      cleanupFunctions.push(cleanup);
-    }
-
-    const checkBoundaries = () => {
-      const stars = document.querySelectorAll(".star");
-      const space = document.querySelector("#starBg");
-
-      stars.forEach((star) => {
-        const htmlStar = star as HTMLElement;
-        const top = Number(htmlStar.style.top.slice(0, -2));
-        const left = Number(htmlStar.style.left.slice(0, -2));
-
-        const height = space?.clientHeight || 0;
-        const width = space?.clientWidth || 0;
-
-        if (top < -100 || left < 0 || top > height || left > width) {
-          htmlStar.remove();
-          const cleanup = createStar();
-          cleanupFunctions.push(cleanup);
-        }
-      });
-    };
-
-    const boundaryInterval = setInterval(checkBoundaries, 50);
-
-    return () => {
-      clearInterval(boundaryInterval);
-      // Clean up all stars and their animations
-      cleanupFunctions.forEach((cleanup) => cleanup());
+      cancelAnimationFrame(frame);
+      ro.disconnect();
     };
   }, []);
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const s = lens.current;
+    s.tx = e.clientX - rect.left;
+    s.ty = e.clientY - rect.top;
+    s.lastMove = performance.now();
+    if (!interacted) setInteracted(true);
+  };
 
-    mm.add("(min-width: 640px)", () => {
-      const tl = gsap.timeline({
-        delay: 1,
-        onComplete: () => {
-          setIsInitialAnimationDone(true);
-          gsap.to("#grid", {
-            y: 20,
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-        },
-      });
+  useGSAP(
+    () => {
+      const s = lens.current;
 
-      tl.to("#hero-text", {
-        bottom: "18vh",
-        duration: 1,
-        ease: "power2.out",
-      });
-
-      tl.to(
-        "#gallery",
-        {
-          bottom: "-2rem",
-          duration: 1,
-          ease: "power2.out",
-        },
-        "<",
-      );
-
-      tl.add("spread", "-=0.4");
-
-      cardsRef.current.forEach((card, index) => {
-        if (!card) return;
-        const slotIndex = positions[index];
-        const slot = SLOTS[slotIndex];
-        tl.to(
-          card,
-          {
-            x: slot.x,
-            rotateZ: slot.rotateZ,
-            scale: slot.scale,
-            zIndex: slot.zIndex,
-            opacity: slot.opacity,
-            duration: 1,
-            ease: "power2.out",
-          },
-          "spread",
-        );
-      });
-
-      tl.to(
-        "#grid",
-        {
-          bottom: 0,
-          rotateZ: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.4",
-      );
-      const tl2 = gsap.timeline();
-      tl2.to("#hero", {
-        y: 80,
-        ease: "power2.out",
-      });
+      // Scroll: the lens grows until the whole drawing has become the render.
       ScrollTrigger.create({
-        trigger: "#hero",
-        start: "top 100px",
+        trigger: sectionRef.current,
+        start: "top top",
         end: "bottom top",
-        scrub: 1,
-        animation: tl2,
-      });
-    });
-
-    mm.add("(max-width: 639px)", () => {
-      const tl = gsap.timeline({
-        delay: 1,
-        onComplete: () => {
-          setIsInitialAnimationDone(true);
-          gsap.to("#grid", {
-            y: 20,
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
+        onUpdate: (self) => {
+          s.scroll = self.progress;
         },
       });
 
-      tl.to("#hero-text", {
-        bottom: "160px",
-        duration: 1,
-        ease: "power2.out",
-      });
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({ delay: 0.25 });
+        // The drawing "plots" onto the paper top to bottom.
+        tl.fromTo(
+          ".hero-drawing",
+          { clipPath: "inset(0% 0% 100% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 2, ease: "power2.inOut" },
+        )
+          .from(".hero-line", { yPercent: 105, duration: 1.2, stagger: 0.1, ease: "expo.out" }, 0.5)
+          .from(".hero-fade", { y: 14, opacity: 0, duration: 0.8, stagger: 0.08, ease: "power3.out" }, 1)
+          .to(s, { scale: 1, duration: 1.1, ease: "back.out(1.4)" }, 1.7);
 
-      tl.to(
-        "#gallery",
-        {
-          bottom: "-7vh",
-          duration: 1,
-          ease: "power2.out",
-        },
-        "<",
-      );
-
-      tl.add("spread", "-=0.4");
-
-      cardsRef.current.forEach((card, index) => {
-        if (!card) return;
-        const slotIndex = positions[index];
-        const slot = SLOTS[slotIndex];
-        tl.to(
-          card,
-          {
-            x: slot.x,
-            rotateZ: slot.rotateZ,
-            scale: slot.scale,
-            zIndex: slot.zIndex,
-            opacity: slot.opacity,
-            duration: 1,
-            ease: "power2.out",
+        gsap.to(".hero-copy", {
+          y: -80,
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "55% top",
+            scrub: true,
           },
-          "spread",
-        );
+        });
+      });
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        s.scale = 1;
       });
 
-      tl.to(
-        "#grid",
-        {
-          bottom: 0,
-          rotateZ: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.4",
-      );
-      const tl2 = gsap.timeline();
-      tl2.to("#hero", {
-        y: 80,
-        ease: "power2.out",
-      });
-      ScrollTrigger.create({
-        trigger: "#hero",
-        start: "top 100px",
-        end: "bottom top",
-        scrub: 1,
-        animation: tl2,
-      });
-    });
-  }, []); // Run once on mount!
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
-  useGSAP(() => {
-    if (!isInitialAnimationDone) return;
-
-    cardsRef.current.forEach((card, index) => {
-      if (!card) return;
-      const slotIndex = positions[index];
-      const slot = SLOTS[slotIndex];
-      gsap.to(card, {
-        x: slot.x,
-        rotateZ: slot.rotateZ,
-        scale: slot.scale,
-        zIndex: slot.zIndex,
-        opacity: slot.opacity,
-        duration: 0.8,
-        ease: "power2.inOut",
-      });
-    });
-  }, [positions, isInitialAnimationDone]);
+  const ink = tertialColor;
+  const faint = `${tertialColor}8c`;
 
   return (
-    <>
+    <section
+      id="hero"
+      ref={sectionRef}
+      aria-label="Sanova Architects"
+      className="relative h-[100svh] min-h-[640px] overflow-hidden"
+      style={{
+        backgroundColor: secondaryColor,
+        color: ink,
+        backgroundImage: `linear-gradient(${tertialColor}0a 1px, transparent 1px), linear-gradient(90deg, ${tertialColor}0a 1px, transparent 1px)`,
+        backgroundSize: "36px 36px",
+      }}
+    >
+      <SketchFilter />
+
+      {/* ── Stage: drawing + render lens ─────────────────── */}
       <div
-        id="hero"
-        className="flex justify-center flex-col items-center overflow-hidden relative"
+        ref={stageRef}
+        onPointerMove={handlePointerMove}
+        className="absolute inset-x-0 bottom-0 h-[54%] lg:inset-y-0 lg:left-auto lg:right-0 lg:h-auto lg:w-[58%] touch-pan-y"
       >
+        {/* The drawing, trailing off into the paper */}
         <div
-          id="starBg"
-          className="absolute inset-0 overflow-hidden pointer-events-none"
-        ></div>
-        <div
-          id="hero-text"
-          className="sm:h-[calc(100vh)] h-[calc(100vh)] flex flex-col justify-center items-center gap-2 relative bottom-[4vh] z-10 pointer-events-none"
+          aria-hidden="true"
+          className="hero-drawing absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_0%,black_35%)] lg:[mask-image:linear-gradient(to_right,transparent_0%,black_32%)]"
+          style={{ willChange: "transform" }}
         >
-          <div className="flex flex-col items-center">
-            <h1 className="text-center font-avant font-black uppercase text-[clamp(40px,7vw,100px)] leading-16 tracking-tighter">
-              Sanova
-            </h1>
-            <h2 
-              className="text-center font-avant font-light uppercase text-[clamp(28px,5vw,70px)] tracking-[0.1em] sm:tracking-[0.2em]"
-              style={{ color: primaryColor }}
-            >
-              Architects
-            </h2>
-          </div>
-          
-          <div 
-            className="w-[80px] h-[2px] mt-4 mb-3 opacity-60" 
-            style={{ backgroundColor: primaryColor }}
-          ></div>
+          <Image
+            src={RENDER.src}
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            className="object-cover object-center"
+            style={{ filter: "url(#hero-sketch)" }}
+          />
+        </div>
+
+        {/* The render, seen through the lens */}
+        <div
+          className="absolute inset-0"
+          style={{ clipPath: "circle(var(--lr, 0px) at var(--lx, 50%) var(--ly, 50%))" }}
+        >
+          <Image
+            src={RENDER.src}
+            alt={`${RENDER.caption}, a residence designed by Sanova Architects`}
+            fill
+            priority
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            className="object-cover object-center"
+          />
+        </div>
+
+        {/* Lens ring + label */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0"
+          style={{
+            width: "calc(var(--lr, 0px) * 2)",
+            height: "calc(var(--lr, 0px) * 2)",
+            transform: "translate(calc(var(--lx, 0px) - var(--lr, 0px)), calc(var(--ly, 0px) - var(--lr, 0px)))",
+            opacity: "var(--ring, 1)",
+          }}
+        >
+          <div className="absolute inset-0 rounded-full border" style={{ borderColor: `${secondaryColor}cc` }} />
+          <span
+            className="absolute left-[85%] top-[8%] whitespace-nowrap font-beach text-2xl"
+            style={{ color: primaryColor }}
+          >
+            the finished space
+          </span>
+        </div>
+
+        {/* Interaction hint */}
+        <p
+          aria-hidden="true"
+          className={`hero-fade pointer-events-none absolute bottom-6 right-5 sm:right-[3vw] font-avant text-[10px] uppercase tracking-[0.3em] transition-opacity duration-700 ${interacted ? "opacity-0" : "opacity-100"}`}
+          style={{ color: faint }}
+        >
+          Move across the drawing
+        </p>
+      </div>
+
+      {/* ── Copy ─────────────────────────────────────────── */}
+      <div className="hero-copy pointer-events-none relative z-10 flex h-[46%] lg:h-full flex-col px-5 sm:px-[3vw] pt-[96px] sm:pt-[120px] lg:pb-12">
+        {/* <p
+          className="hero-fade font-avant text-[10px] sm:text-[11px] uppercase tracking-[0.3em]"
+          style={{ color: faint }}
+        >
+          Sanova Architects
+        </p> */}
+
+        <div className="mt-5 lg:mt-auto lg:mb-auto">
+          <h1 className="font-posterama uppercase leading-[0.9] tracking-[-0.015em] text-[clamp(46px,6.4vw,124px)]">
+            <span className="block overflow-hidden pb-[0.05em]">
+              <span className="hero-line block">From plan</span>
+            </span>
+            <span className="block overflow-hidden pb-[0.05em]">
+              <span className="hero-line block">
+                to <span style={{ color: primaryColor }}>place.</span>
+              </span>
+            </span>
+          </h1>
 
           <p
-            className="text-center font-beach text-[clamp(12px,5vw,32px)] sm:text-[clamp(20px,2vw,36px)] w-[70vw] sm:w-[55vw] tracking-widest"
-            style={{ color: tertialColor }}
+            className="hero-fade mt-4 lg:mt-7 max-w-[38ch] font-avenir text-[14px] sm:text-[17px] leading-relaxed"
+            style={{ color: `${tertialColor}b3` }}
           >
-            Bringing Architecture to Life with Stunning Visuals.
+            We plan, design and visualize buildings, interiors and landscapes,
+            taking every project from its first drawing to a space you can live in.
           </p>
-        </div>
-        <div
-          id="gallery"
-          className="absolute -bottom-96 w-full h-[350px] flex justify-center items-start z-10"
-        >
-          {videosList.map((src, idx) => (
-            <div
-              key={idx}
-              ref={(el) => {
-                cardsRef.current[idx] = el;
-              }}
-              className="absolute w-[90%] h-[225px] sm:w-[600px] sm:h-[350px] rounded-[28px] overflow-hidden border-[#FFF3E9] border-2 shadow-xl origin-bottom"
-              style={{
-                zIndex: idx === 1 ? 20 : 10, // Initial stacking before GSAP spreads them
-              }}
-            >
-              <video
-                ref={(el) => {
-                  videosRef.current[idx] = el;
-                }}
-                src={`${src}#t=0.001`}
-                preload="metadata"
-                className={`object-cover w-full h-full ${src == "/videos/landscape.mp4" ? "scale-130" : "scale-110"}`}
-                muted
-                playsInline
-                onEnded={() => handleVideoEnded(idx)}
-                onTimeUpdate={() => handleTimeUpdate(idx)}
-              />
-            </div>
-          ))}
 
-          {/* Tracking Bar */}
-          <div className="absolute bottom-18 flex items-center gap-3 z-30 px-6 py-3 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl">
-            {[1, 0, 2].map((idx) => {
-              const isActive = positions[idx] === 1;
-              return (
-                <div
-                  key={`track-${idx}`}
-                  className={`relative h-1.5 rounded-full overflow-hidden transition-all duration-500 ease-in-out ${
-                    isActive ? "w-20 bg-white/20" : "w-2.5 bg-white/40"
-                  }`}
-                >
-                  <div
-                    className="absolute top-0 left-0 h-full rounded-full transition-all duration-75 ease-linear"
-                    style={{
-                      width: isActive ? `${progress}%` : "0%",
-                      backgroundColor: primaryColor,
-                      boxShadow: isActive ? `0 0 12px ${primaryColor}` : "none",
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          {/* Disciplines, listed like a drawing register */}
+          <ol
+            className="hero-fade mt-5 lg:mt-8 hidden max-w-[50%] sm:flex flex-wrap gap-x-5 gap-y-1.5 font-avant text-[10px] sm:text-[11px] uppercase tracking-[0.2em]"
+            style={{ color: faint }}
+          >
+            {DISCIPLINES.map((d, i) => (
+              <li key={d} className="whitespace-nowrap">
+                <span className="tabular-nums">({String(i + 1).padStart(2, "0")})</span>{" "}
+                <span style={{ color: tertialColor }}>{d}</span>
+              </li>
+            ))}
+          </ol>
+
+          <Link
+            href="/projects"
+            className="hero-fade pointer-events-auto group mt-5 lg:mt-8 inline-flex items-center gap-3 font-avant text-sm font-bold focus-visible:outline-2 focus-visible:outline-offset-4"
+            style={{ outlineColor: primaryColor }}
+          >
+            <span className="relative">
+              See the work
+              <span
+                aria-hidden="true"
+                className="absolute left-0 -bottom-1 h-px w-full origin-right transition-transform duration-500 group-hover:origin-left group-hover:scale-x-0"
+                style={{ backgroundColor: ink }}
+              />
+            </span>
+            <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
         </div>
-        <Image
-          src="/images/grid.svg"
-          id="grid"
-          alt="Grid"
-          className="absolute right-0 -bottom-40 -rotate-z-40 origin-right"
-          width={509}
-          height={379}
-        />
+
+        <p
+          className="hero-fade hidden lg:block font-avant text-[10px] uppercase tracking-[0.3em]"
+          style={{ color: faint }}
+        >
+          Fig. 01 <span className="mx-2">—</span>
+          <span style={{ color: ink }}>{RENDER.caption}</span>, {RENDER.detail}
+        </p>
       </div>
-    </>
+    </section>
   );
 };
 

@@ -71,7 +71,7 @@ const Projects = () => {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen px-[20px] sm:px-[100px] overflow-hidden relative flex sm:items-center sm:justify-between py-[10vh] flex-col sm:flex-row"
+      className="min-h-screen px-[20px] sm:px-[100px] overflow-hidden relative flex justify-center sm:items-center sm:justify-between gap-10 sm:gap-0 py-[12vh] sm:py-[10vh] flex-col sm:flex-row"
       style={{ backgroundColor: tertialColor }}
     >
       <Image
@@ -82,33 +82,39 @@ const Projects = () => {
         className="w-full h-full object-cover opacity-20 absolute inset-0 pointer-events-none"
       />
       <style>{`
-        @media (max-width: 639px) {
-          .marquee-right {
-            animation: scroll-right 20s linear infinite;
+        .marquee-scroll {
+          animation: marquee-left-scroll 25s linear infinite;
+        }
+        /* Tiles fade out toward the left edge. Shorter fade on phones. */
+        .proj-mask {
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%, black 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 18%, black 100%);
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+        }
+        @media (min-width: 640px) {
+          .proj-mask {
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
           }
-          .marquee-left {
-            animation: scroll-left 20s linear infinite;
-          }
-          @keyframes scroll-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0%); }
-          }
-          @keyframes scroll-left {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-          }
+        }
+        @keyframes marquee-left-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
 
-      <div className="z-50 flex gap-5 flex-col w-[70%] sm:w-[45%] shrink-0 proj-text">
+      <div className="z-50 flex gap-4 sm:gap-5 flex-col w-full sm:w-[45%] shrink-0 proj-text">
         <h2
-          className="font-avant text-sm sm:text-xl tracking-[0.2em] font-medium"
+          className="font-avant text-xs sm:text-xl tracking-[0.2em] font-medium"
           style={{ color: secondaryColor }}
         >
           RECENT PROJECTS
         </h2>
         <p
-          className="font-bold text-[2.5rem] sm:text-[3.5rem] leading-[1.1] font-avant"
+          className="font-bold text-[clamp(1.75rem,8.2vw,2.5rem)] sm:text-[3.5rem] leading-[1.1] font-avant"
           style={{ color: secondaryColor }}
         >
           A <span style={{ color: primaryColor }}>glimpse</span> into the
@@ -117,122 +123,94 @@ const Projects = () => {
         </p>
       </div>
 
-      <div
-        id="proj-gallery"
-        className="group peer z-50 flex flex-col gap-6 w-[65%] h-full justify-center overflow-visible ml-20 transition-transform duration-700 ease-in-out -translate-x-[200px] sm:translate-x-0 sm:scale-100 scale-80 hover:-translate-x-[180px] sm:hover:translate-x-[20px] cursor-pointer"
-        onClick={() => router.push("/projects")}
-      >
-        {/* Row 1 */}
-        <div className="proj-row">
-          <div className="flex gap-6 pr-6 min-w-max sm:translate-x-[40px] max-sm:ml-[40px] marquee-right">
-            {row1.map((img) => (
-              <div
-                key={img.id}
-                className={`${img.width} ${img.height} relative rounded-2xl overflow-hidden shadow-2xl shrink-0 group-hover:scale-95 transition-transform duration-700 ease-in-out`}
-              >
-                <Image
-                  src={img.src}
-                  alt="Project"
-                  fill
-                  className="object-cover "
-                />
-              </div>
-            ))}
-            {row1.map((img) => (
-              <div
-                key={`dup-${img.id}`}
-                className={`${img.width} ${img.height} relative rounded-2xl overflow-hidden shadow-2xl shrink-0 sm:hidden`}
-              >
-                <Image
-                  src={img.src}
-                  alt="Project"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Phones: full-bleed edge to edge. Desktop: right 65%, bleeding off the right edge. */}
+      <div className="proj-mask group z-50 flex items-center relative w-[calc(100%+40px)] -mx-[20px] sm:ml-0 sm:-mr-[100px] sm:w-[65%] sm:h-full">
+        {/* Colorless blur that only affects the tiles, strongest at the left edge */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-[20%] sm:w-[35%] z-[55] pointer-events-none backdrop-blur-md"
+          style={{
+            maskImage: "linear-gradient(to right, black 0%, black 30%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, black 0%, black 30%, transparent 100%)",
+          }}
+        />
 
-        {/* Row 2 */}
-        <div className="proj-row">
-          <div className="flex gap-6 pr-6 min-w-max sm:translate-x-[120px] max-sm:ml-[120px] marquee-left">
-            {row2.map((img) => (
-              <div
-                key={img.id}
-                className={`${img.width} ${img.height} relative rounded-2xl overflow-hidden shadow-2xl shrink-0 group-hover:scale-95 transition-transform duration-700 ease-in-out`}
-              >
-                <Image
-                  src={img.src}
-                  alt="Project"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-            {row2.map((img) => (
-              <div
-                key={`dup-${img.id}`}
-                className={`${img.width} ${img.height} relative rounded-2xl overflow-hidden shadow-2xl shrink-0 sm:hidden`}
-              >
-                <Image
-                  src={img.src}
-                  alt="Project"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 3 */}
-        <div className="proj-row">
-          <div className="flex gap-6 pr-6 min-w-max sm:-translate-x-[10px] max-sm:-ml-[10px] marquee-right">
-            {row3.map((img) => (
-              <div
-                key={img.id}
-                className={`${img.width} ${img.height} relative rounded-2xl overflow-hidden shadow-2xl shrink-0 group-hover:scale-95 transition-transform duration-700 ease-in-out`}
-              >
-                <Image
-                  src={img.src}
-                  alt="Project"
-                  fill
-                  // className="object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-            {row3.map((img) => (
-              <div
-                key={`dup-${img.id}`}
-                className={`${img.width} ${img.height} relative rounded-2xl overflow-hidden shadow-2xl shrink-0 sm:hidden`}
-              >
-                <Image
-                  src={img.src}
-                  alt="Project"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Right Gradient Overlay on Hover */}
-      <Link 
-        href="/projects" 
-        className="absolute right-0 top-0 bottom-0 w-[100px] sm:w-[140px] z-[60] flex items-center justify-center opacity-0 peer-hover:opacity-100 hover:opacity-100 transition-opacity duration-700 ease-in-out cursor-pointer"
-        style={{ background: `linear-gradient(to right, transparent, ${primaryColor})` }}
-      >
-        <div 
-          className="font-avant text-[10px] sm:text-xs font-bold tracking-[0.4em] uppercase -rotate-90 whitespace-nowrap"
-          style={{ color: secondaryColor }}
+        <div
+          id="proj-gallery"
+          className="flex flex-col gap-3 sm:gap-6 w-full h-full justify-center sm:ml-20 transition-transform duration-700 ease-in-out sm:group-hover:translate-x-[20px] cursor-pointer"
+          onClick={() => router.push("/projects")}
         >
-          Explore Projects
+          {/* Row 1 */}
+          <div className="proj-row">
+            <div className="flex gap-3 pr-3 sm:gap-6 sm:pr-6 min-w-max marquee-scroll">
+              {[...row1, ...row1].map((img, i) => (
+                <div
+                  key={`r1-${i}`}
+                  className={`w-[140px] h-[140px] sm:w-[210px] sm:h-[210px] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shrink-0 group-hover:scale-95 transition-transform duration-700 ease-in-out`}
+                >
+                  <Image
+                    src={img.src}
+                    alt="Project"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 */}
+          <div className="proj-row">
+            <div className="flex gap-3 pr-3 sm:gap-6 sm:pr-6 min-w-max marquee-scroll" style={{ animationDuration: '30s', animationDelay: '-5s' }}>
+              {[...row2, ...row2].map((img, i) => (
+                <div
+                  key={`r2-${i}`}
+                  className={`w-[140px] h-[140px] sm:w-[210px] sm:h-[210px] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shrink-0 group-hover:scale-95 transition-transform duration-700 ease-in-out`}
+                >
+                  <Image
+                    src={img.src}
+                    alt="Project"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 */}
+          <div className="proj-row">
+            <div className="flex gap-3 pr-3 sm:gap-6 sm:pr-6 min-w-max marquee-scroll" style={{ animationDuration: '22s', animationDelay: '-10s' }}>
+              {[...row3, ...row3].map((img, i) => (
+                <div
+                  key={`r3-${i}`}
+                  className={`w-[140px] h-[140px] sm:w-[210px] sm:h-[210px] relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl shrink-0 group-hover:scale-95 transition-transform duration-700 ease-in-out`}
+                >
+                  <Image
+                    src={img.src}
+                    alt="Project"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </Link>
+
+        {/* Right Gradient Overlay on Hover */}
+        <Link 
+          href="/projects" 
+          className="absolute right-0 top-0 bottom-0 w-[100px] sm:w-[140px] z-[60] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out cursor-pointer"
+          style={{ background: `linear-gradient(to right, transparent, ${primaryColor})` }}
+        >
+          <div 
+            className="font-avant text-[10px] sm:text-xs font-bold tracking-[0.4em] uppercase -rotate-90 whitespace-nowrap"
+            style={{ color: secondaryColor }}
+          >
+            Explore Projects
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

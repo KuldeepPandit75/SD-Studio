@@ -207,7 +207,7 @@ export const PROJECTS = [
     location: "Sector 12, Noida (Near Adobe Regional Office)",
     status: "Ongoing",
     size: "250 sq mtr",
-    image: "/images/projApex.jpeg",
+    image: "/images/projApex.jpg",
     year: "2025",
     orientation: "portrait",
     description:
@@ -307,7 +307,7 @@ export const PROJECTS = [
     location: "Sector 100, Noida",
     status: "Ongoing",
     size: "250 sq mtr",
-    image: "/images/projGrand.jpeg",
+    image: "/images/projGrand.jpg",
     year: "2025",
     orientation: "portrait",
     description:
@@ -376,7 +376,7 @@ export const PROJECTS = [
     location: "Salendpur Village, Begusarai, Bihar",
     status: "Ongoing",
     size: "400 sq m",
-    image: "/images/projOasis.jpeg",
+    image: "/images/projOasis.jpg",
     year: "2025",
     orientation: "landscape",
     description:
@@ -410,7 +410,7 @@ export const PROJECTS = [
     location: "Sector 100, Noida",
     status: "Ongoing",
     size: "250 sq mtr",
-    image: "/images/projNexus.jpeg",
+    image: "/images/projNexus.jpg",
     year: "2025",
     orientation: "portrait",
     description:
@@ -473,7 +473,7 @@ export const PROJECTS = [
     location: "Sector 63, Noida",
     status: "Ongoing",
     size: "450 sq mtr",
-    image: "/images/projCanopy.jpeg",
+    image: "/images/projCanopy.jpg",
     year: "2025",
     orientation: "landscape",
     description:
@@ -507,7 +507,7 @@ export const PROJECTS = [
     location: "Sector 51, Noida",
     status: "Ongoing",
     size: "93 sq mtr",
-    image: "/images/projLinear.jpeg",
+    image: "/images/projLinear.jpg",
     year: "2026",
     orientation: "portrait",
     description:
@@ -536,7 +536,7 @@ export const PROJECTS = [
     location: "Sector 117, Noida",
     status: "Completed",
     size: "340 sq mtr",
-    image: "/images/projGuest.jpeg",
+    image: "/images/projGuest.jpg",
     year: "2025",
     orientation: "portrait",
     description:

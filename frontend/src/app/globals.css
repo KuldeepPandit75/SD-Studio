@@ -46,11 +46,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family:"Posterama";
+  src: url("/fonts/Posterama.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 @theme{
   --font-avenir: "Avenir", sans-serif;
   --font-avant: "Avant", sans-serif;
   --font-beach: "Beach", sans-serif;
   --font-amsterdam: "Amsterdam", sans-serif;
+  --font-posterama: "Posterama", sans-serif;
 }
 
 body{

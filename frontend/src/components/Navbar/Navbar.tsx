@@ -107,16 +107,20 @@ const Navbar = () => {
         <Link
           href="/"
           id="logo"
-          className={`flex items-center gap-[10px] sm:gap-[20px] select-none relative ${isServicesPage ? "" : "mix-blend-difference"} z-50`}
+          className={`flex items-center select-none -margin-left-10 gap-1 sm:gap-6 relative ${isServicesPage ? "" : "mix-blend-difference"} z-50`}
         >
-          <Image alt="logo" width={60} height={60} className="select-none border-b-4" src={"/icons/logoB.svg"} style={{borderColor: primaryColor}}/>
+          <Image alt="logo" width={60} height={60} className="select-none scale-60 sm:scale-85" src={isServicesPage?"/icons/logoW.png":"/icons/logo.png"} style={{borderColor: primaryColor}}/>
+          <div>
+            <h1 className={`font-posterama text-2xl sm:text-4xl relative top-1 ${isServicesPage?"text-white":""}`}>Savova</h1>
+            <h1 className="font-posterama text-sm sm:text-lg relative left-8 sm:left-16 bottom-1" style={{color:primaryColor}}>Architects</h1>
+          </div>
         </Link>
         <div
           id="nav-links"
           className="hidden md:block"
           style={{ color: isServicesPage ? secondaryColor : "inherit" }}
         >
-          <ul className="flex w-[25vw] justify-between font-bold text-lg">
+          <ul className="flex w-[25vw] justify-between font-bold text-lg relative right-10">
             <li className="opacity-0">
               <Link href="/services">Services</Link>
             </li>

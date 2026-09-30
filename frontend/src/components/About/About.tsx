@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { services } from "../Services/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -240,33 +241,37 @@ const About = () => {
              <div className="text-sm uppercase tracking-[0.2em] font-bold mb-4" style={{ color: primaryColor }}>What We Do</div>
              <h3 className="font-avant text-5xl sm:text-7xl uppercase leading-[0.9]">Expertise</h3>
            </div>
-           <Link href="/our-services" className="text-sm font-bold uppercase tracking-[0.1em] border-b pb-1 hover:opacity-50 transition-opacity" style={{ borderColor: primaryColor }}>
+           <Link href="/services#services-showcase" className="text-sm font-bold uppercase tracking-[0.1em] border-b pb-1 hover:opacity-50 transition-opacity" style={{ borderColor: primaryColor }}>
              View All Services
            </Link>
          </div>
 
          <div className="services-container flex flex-col w-full border-t" style={{ borderColor: `${primaryColor}30` }}>
-            {[
-              { title: "Architecture", img: "/images/projArcadia.jpeg" },
-              { title: "Interior Design", img: "/images/interior1.jpeg" },
-              { title: "Master Planning", img: "/images/map.png" },
-              { title: "Urban Planning", img: "/images/projNirvana.jpeg" },
-              { title: "Residential", img: "/images/projGuest.jpeg" },
-              { title: "Commercial", img: "/images/projNexus.jpeg" },
-            ].map((srv, i) => (
-              <div key={i} className="service-item group relative flex flex-col md:flex-row justify-between items-start md:items-center py-8 md:py-12 border-b cursor-pointer overflow-hidden" style={{ borderColor: `${primaryColor}30` }}>
+            {/* Same services, order and images as the "What We Offer" tabs on /services.
+                The index doubles as the ?tab= value the showcase reads. */}
+            {services.map((s) => ({ title: s.name, img: s.img })).map((srv, i) => (
+              <Link
+                key={srv.title}
+                href={`/services?tab=${i}#services-showcase`}
+                className="service-item group relative hover:z-20 focus-visible:z-20 flex flex-col md:flex-row justify-between items-start md:items-center py-8 md:py-12 border-b cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4"
+                style={{ borderColor: `${primaryColor}30`, outlineColor: primaryColor }}
+              >
                  <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-4 sm:gap-6">
                     <span className="font-avant text-sm sm:text-lg opacity-40 font-bold">0{i+1}</span>
                     <h4 className="font-avant text-3xl sm:text-5xl uppercase transition-transform duration-500 group-hover:translate-x-4" style={{ color: primaryColor }}>{srv.title}</h4>
                  </div>
-                 <div className="hidden md:block text-sm uppercase tracking-widest z-10 font-bold mt-4 md:mt-0 transition-all duration-500 group-hover:-translate-x-4">
-                    Explore
+                 {/* Hover image: shown uncropped at its natural aspect ratio, floating over neighbouring rows */}
+                 <div className="absolute right-[5%] md:right-[8%] top-1/2 -translate-y-1/2 pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-out z-0 rounded-lg overflow-hidden shadow-2xl">
+                    <Image
+                      src={srv.img}
+                      alt=""
+                      width={900}
+                      height={900}
+                      sizes="(min-width: 768px) 460px, 260px"
+                      className="block h-auto w-auto max-w-[260px] max-h-[190px] md:max-w-[460px] md:max-h-[340px]"
+                    />
                  </div>
-                 {/* Hover Image */}
-                 <div className="absolute right-[10%] md:right-[20%] top-1/2 -translate-y-1/2 w-[250px] md:w-[350px] h-[150px] md:h-[220px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 overflow-hidden rounded-lg">
-                    <Image src={srv.img} alt={srv.title} fill className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700" />
-                 </div>
-              </div>
+              </Link>
             ))}
          </div>
       </section>

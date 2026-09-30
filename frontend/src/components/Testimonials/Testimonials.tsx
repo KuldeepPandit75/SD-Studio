@@ -130,7 +130,7 @@ const Testimonials = () => {
   return (
     <section
       ref={sectionRef}
-      className="px-[20px] sm:px-[80px] flex flex-col justify-center min-h-screen py-[80px]"
+      className="px-[20px] sm:px-10 xl:px-[80px] flex flex-col justify-center min-h-screen py-[80px] overflow-x-clip"
       style={{ backgroundColor: secondaryColor }}
     >
       {/* Header */}
@@ -151,15 +151,18 @@ const Testimonials = () => {
       </div>
 
       {/* Cards Desktop */}
-      <div className="sm:flex gap-10 justify-between items-stretch hidden select-none">
+      {/* 768–1279px: two columns, third card spans the row. 1280px+: three columns. */}
+      <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-10 items-stretch select-none">
         {testimonials.map((testimonial, idx) => (
           <div
             key={idx}
-            className="relative min-w-[350px] w-1/3 rounded-2xl p-10 flex flex-col scale-90 test-card"
+            className={`relative min-w-0 rounded-2xl p-8 xl:p-10 flex flex-col xl:scale-90 test-card ${
+              idx === testimonials.length - 1 ? "md:col-span-2 xl:col-span-1" : ""
+            }`}
             style={{ backgroundColor: tertialColor, color: secondaryColor }}
           >
             {/* Quote Icon */}
-            <div className="absolute -top-12 -right-4 w-28 h-28 select-none pointer-events-none">
+            <div className="absolute -top-10 -right-2 w-20 h-20 xl:-top-12 xl:-right-4 xl:w-28 xl:h-28 select-none pointer-events-none">
               <Image
                 src="/icons/‘’.svg"
                 alt="Quote"
@@ -188,7 +191,7 @@ const Testimonials = () => {
 
             {/* Text */}
             <div className="flex-1 mb-[5rem]">
-              <p className="text-lg leading-[1.6] text-white/90 font-light font-avant pr-4 select-none">
+              <p className="text-base xl:text-lg leading-[1.6] text-white/90 font-light font-avant pr-4 select-none">
                 {testimonial.quote}
               </p>
             </div>
@@ -210,7 +213,7 @@ const Testimonials = () => {
       </div>
 
       {/* Mobile Cards Container */}
-      <div className="sm:hidden flex flex-col items-center mt-4 test-card">
+      <div className="md:hidden flex flex-col items-center mt-4 test-card w-full max-w-xl mx-auto">
         <div 
           className="grid w-full"
           onPointerDown={handlePointerDown}
@@ -221,7 +224,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className={`col-start-1 row-start-1 w-full rounded-2xl p-8 flex flex-col transition-opacity duration-700 ease-in-out ${
+              className={`relative col-start-1 row-start-1 w-full rounded-2xl p-8 flex flex-col transition-opacity duration-700 ease-in-out ${
                 idx === activeTestimonial
                   ? "opacity-100 z-10"
                   : "opacity-0 z-0 pointer-events-none"
