@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     },
   ],
   icons: {
-    icon: "/icons/logo.svg",
+    icon: "/icons/logoW.png",
   },
 };
 

@@ -18,8 +18,8 @@ const Projects = () => {
     { id: 1, src: "/images/interior.jpg", width: "w-[210px]", height: "h-[210px]" },
     { id: 2, src: "/images/exterior.jpg", width: "w-[210px]", height: "h-[210px]" },
     { id: 3, src: "/images/proj1.jpg", width: "w-[210px]", height: "h-[210px]" },
-    { id: 4, src: "/images/proj2.jpg", width: "w-[210px]", height: "h-[210px]" },
-    { id: 5, src: "/images/projApex.jpeg", width: "w-[210px]", height: "h-[210px]" },
+    { id: 4, src: "/images/proj12.jpg", width: "w-[210px]", height: "h-[210px]" },
+    { id: 5, src: "/images/projApex.jpg", width: "w-[210px]", height: "h-[210px]" },
     { id: 6, src: "/images/interior3.jpeg", width: "w-[210px]", height: "h-[210px]" },
   ];
 
@@ -29,7 +29,7 @@ const Projects = () => {
     { id: 9, src: "/images/proj5.jpg", width: "w-[210px]", height: "h-[210px]" },
     { id: 10, src: "/images/projArcadia.jpeg", width: "w-[210px]", height: "h-[210px]" },
     { id: 11, src: "/images/proj10.jpg", width: "w-[210px]", height: "h-[210px]" },
-    { id: 12, src: "/images/projCanopy.jpeg", width: "w-[210px]", height: "h-[210px]" },
+    { id: 12, src: "/images/projCanopy.jpg", width: "w-[210px]", height: "h-[210px]" },
   ];
 
   const row3 = [

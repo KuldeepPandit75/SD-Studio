@@ -23,7 +23,7 @@ export const services = [
     galleryImgs: [
       "/images/exterior1.jpeg",
       "/images/proj4.jpg",
-      "/images/projGrand.jpeg",
+      "/images/projGrand.jpg",
     ],
     accent: "#5B7B8A",
   },
@@ -47,7 +47,7 @@ export const services = [
     turnaround: "7-10 working days",
     img: "/images/arch.jpg",
     galleryImgs: [
-      "/images/proj2.jpg",
+      "/images/proj11.jpg",
       "/images/proj4.jpg",
       "/images/proj8.jpg",
     ],
@@ -214,7 +214,7 @@ export const PROJECTS = [
       "A compact urban residence that maximises vertical space through a series of split-level floors connected by a central light well. The facade employs angled aluminium fins that filter harsh western sun while creating a distinctive street presence. Every square metre is designed to work harder.",
     scope: ["Architectural Planning", "Exterior Design", "Interior Design"],
     gallery: [
-      "/images/projApex.jpeg",
+      "/images/projApex.jpg",
     ],
     highlights: [
       "Split-level floor plates maximising spatial perception",
@@ -319,7 +319,7 @@ export const PROJECTS = [
       "Landscape",
     ],
     gallery: [
-      "/images/projGrand.jpeg",
+      "/images/projGrand.jpg",
     ],
     highlights: [
       "Exposed concrete portal frame as design feature",
@@ -388,7 +388,7 @@ export const PROJECTS = [
       "Structural Assessment",
     ],
     gallery: [
-      "/images/projOasis.jpeg",
+      "/images/projOasis.jpg",
     ],
     highlights: [
       "Three-zone garden layout: productive, contemplative, social",
@@ -417,7 +417,7 @@ export const PROJECTS = [
       "The Nexus Residence is conceived as a series of interlocking volumes, each housing a distinct family function — living, dining, private quarters, and a home studio. The junctions between volumes become the most interesting spaces: double-height voids, skylit staircases, and framed garden views that connect the separate worlds of the house.",
     scope: ["Architectural Planning", "Exterior Design", "Interior Design"],
     gallery: [
-      "/images/projNexus.jpeg",
+      "/images/projNexus.jpg",
     ],
     highlights: [
       "Interlocking volume composition",
@@ -485,7 +485,7 @@ export const PROJECTS = [
       "Landscape",
     ],
     gallery: [
-      "/images/projCanopy.jpeg",
+      "/images/projCanopy.jpg",
     ],
     highlights: [
       "Cantilevered concrete roof extending 3 metres beyond walls",
@@ -514,7 +514,7 @@ export const PROJECTS = [
       "A masterclass in small-footprint design, The Linear Residence arranges all functions along a single east-west axis, ensuring every room receives direct sunlight and natural ventilation. At just 93 square metres, the home feels spacious through careful use of built-in furniture, continuous flooring, and a private rear garden that extends the living room visually.",
     scope: ["Architectural Planning", "Interior Design", "Space Optimisation"],
     gallery: [
-      "/images/projLinear.jpeg",
+      "/images/projLinear.jpg",
     ],
     highlights: [
       "Single-axis plan for maximum light and ventilation",
@@ -548,7 +548,7 @@ export const PROJECTS = [
       "Landscape",
     ],
     gallery: [
-      "/images/projGuest.jpeg",
+      "/images/projGuest.jpg",
     ],
     highlights: [
       "Six individually themed guest suites",
