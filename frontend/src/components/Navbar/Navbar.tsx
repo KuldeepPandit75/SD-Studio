@@ -111,7 +111,7 @@ const Navbar = () => {
         >
           <Image alt="logo" width={60} height={60} className="select-none scale-60 sm:scale-85" src={isServicesPage?"/icons/logoW.png":"/icons/logo.png"} style={{borderColor: primaryColor}}/>
           <div>
-            <h1 className={`font-posterama text-2xl sm:text-4xl relative top-1 ${isServicesPage?"text-white":""}`}>Savova</h1>
+            <h1 className={`font-posterama text-2xl sm:text-4xl relative top-1 ${isServicesPage?"text-white":""}`}>Sanova</h1>
             <h1 className="font-posterama text-sm sm:text-lg relative left-8 sm:left-16 bottom-1" style={{color:primaryColor}}>Architects</h1>
           </div>
         </Link>
